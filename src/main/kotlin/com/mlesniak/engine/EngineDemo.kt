@@ -1,11 +1,14 @@
 package com.mlesniak.engine
 
 import com.mlesniak.engine.core.Renderer
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 
 class EngineDemo : Renderer {
     private var radius = 0
     private var dir = 1
-    private var tick = 0
+    private var angle = 0.0
 
     override fun update() {
         // Empty.
@@ -20,12 +23,18 @@ class EngineDemo : Renderer {
 
         engine.clear(0x000000)
 
-        engine.circle(engine.width() / 2, engine.height() / 2, radius, 0xFF0000)
+        val cx = engine.width() / 2
+        val cy = engine.height() / 2
+
+        engine.circle(cx, cy, radius, 0xFF0000)
         radius += 1 * dir
         if (radius > 100 || radius < 0) {
             dir *= -1
         }
 
-        tick++
+        val dx = cx + (cos(angle * 180.0/PI) * radius).toInt()
+        val dy = cy + (sin(angle * 180.0/PI) * radius).toInt()
+        engine.line(cx, cy, dx, dy, 0xFFFF00)
+        angle += 0.001
     }
 }

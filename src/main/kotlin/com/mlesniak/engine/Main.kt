@@ -10,7 +10,7 @@ fun main() {
     val config = Lwjgl3ApplicationConfiguration().apply {
         setWindowedMode(800, 600)
         setForegroundFPS(60)
-        setTitle("LibGDX Template")
+        setTitle("Engine Demo")
     }
     Lwjgl3Application(Core(renderer), config)
 }
