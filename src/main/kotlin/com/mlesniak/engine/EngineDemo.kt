@@ -2,7 +2,7 @@ package com.mlesniak.engine
 
 import com.mlesniak.engine.core.Renderer
 
-class DemoRenderer : Renderer {
+class EngineDemo : Renderer {
     private var radius = 0
     private var dir = 1
     private var tick = 0

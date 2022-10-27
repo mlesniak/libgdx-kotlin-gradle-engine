@@ -5,7 +5,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 import com.mlesniak.engine.core.Core
 
 fun main() {
-    val renderer = DemoRenderer()
+    val renderer = EngineDemo()
 
     val config = Lwjgl3ApplicationConfiguration().apply {
         setWindowedMode(800, 600)
