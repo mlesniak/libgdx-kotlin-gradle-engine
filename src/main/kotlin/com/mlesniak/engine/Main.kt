@@ -3,7 +3,6 @@ package com.mlesniak.engine
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 
-// TODO(mlesniak) Keyboard handling to close the window
 // TODO(mlesniak) Single Pixel drawing
 
 // TODO(mlesniak) For later...:
