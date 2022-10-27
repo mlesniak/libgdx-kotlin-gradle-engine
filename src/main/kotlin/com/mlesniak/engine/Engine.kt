@@ -9,6 +9,7 @@ import kotlin.math.sin
 // The only function we need is to draw single pixels
 // on a canvas. Everything else will be implemented
 // by our own functions and algorithms.
+@Suppress("MemberVisibilityCanBePrivate")
 class Engine(private val canvas: Canvas) {
     fun height() = canvas.height()
     fun width() = canvas.width()
