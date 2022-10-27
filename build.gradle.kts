@@ -1,7 +1,7 @@
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.6.21"
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("org.graalvm.buildtools.native") version "0.9.12"
+    // id("org.graalvm.buildtools.native") version "0.9.12"
     application
 }
 
@@ -19,5 +19,5 @@ dependencies {
 }
 
 application {
-    mainClass.set("capital.scalable.changeme.AppKt")
+    mainClass.set("com.mlesniak.engine.MainKt")
 }
