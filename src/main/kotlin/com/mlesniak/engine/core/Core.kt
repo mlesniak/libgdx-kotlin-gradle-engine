@@ -15,9 +15,8 @@ class Core(private val renderer: Renderer) : ApplicationAdapter() {
 
     override fun create() {
         batch = SpriteBatch()
-        val pixmap = Pixmap(Gdx.graphics.width, Gdx.graphics.height, Pixmap.Format.RGB888)
-        val canvas = Canvas(pixmap)
-        engine = Engine(canvas)
+        pixmap = Pixmap(Gdx.graphics.width, Gdx.graphics.height, Pixmap.Format.RGB888)
+        engine = Engine(Canvas(pixmap))
     }
 
     override fun render() { // Later on we will collect all keys and/or mouse events
