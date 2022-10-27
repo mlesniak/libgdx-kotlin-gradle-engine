@@ -1,3 +1,5 @@
+import org.codehaus.plexus.util.Os
+
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.6.21"
     id("com.github.johnrengelman.shadow") version "7.1.2"
@@ -16,6 +18,7 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+    implementation("com.badlogicgames.gdx:gdx:$gdxVersion")
     implementation("com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion")
     implementation("com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop")
 
@@ -25,12 +28,8 @@ dependencies {
 
 application {
     mainClass.set("com.mlesniak.engine.MainKt")
-}
 
-
-/*
-if (OperatingSystem.current() == OperatingSystem.MAC_OS) {
-        // Required to run on macOS
-        jvmArgs += "-XstartOnFirstThread"
+    if (Os.isFamily(Os.FAMILY_MAC)) {
+        applicationDefaultJvmArgs += "-XstartOnFirstThread"
     }
- */
+}
