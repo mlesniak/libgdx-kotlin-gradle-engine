@@ -6,7 +6,7 @@ import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.mlesniak.engine.Engine
+import com.mlesniak.engine.engine.Engine
 
 class Core(private val renderer: Renderer) : ApplicationAdapter() {
     private lateinit var batch: SpriteBatch
@@ -17,6 +17,8 @@ class Core(private val renderer: Renderer) : ApplicationAdapter() {
         batch = SpriteBatch()
         pixmap = Pixmap(Gdx.graphics.width, Gdx.graphics.height, Pixmap.Format.RGB888)
         engine = Engine(Canvas(pixmap))
+
+        renderer.setup()
     }
 
     override fun render() { // Later on we will collect all keys and/or mouse events

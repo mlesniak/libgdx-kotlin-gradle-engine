@@ -1,9 +1,16 @@
 package com.mlesniak.engine.core
 
-import com.mlesniak.engine.Engine
+import com.mlesniak.engine.engine.Engine
 
 interface Renderer {
-    fun update()
+    fun setup() {
+        // Empty by default .
+    }
+
+    fun update() {
+        // Empty by default.
+    }
+
     fun draw(engine: Engine)
 }
 

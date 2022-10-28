@@ -1,4 +1,4 @@
-package com.mlesniak.engine
+package com.mlesniak.engine.engine
 
 import com.mlesniak.engine.core.Canvas
 import kotlin.math.PI
@@ -6,7 +6,6 @@ import kotlin.math.absoluteValue
 import kotlin.math.cos
 import kotlin.math.sin
 
-data class Point(val x: Int, val y: Int, val z: Int = 0)
 
 // The only function we need is to draw single pixels
 // on a canvas. Everything else will be implemented
@@ -17,7 +16,7 @@ class Engine(private val canvas: Canvas) {
     fun width() = canvas.width()
 
     fun pixel(p: Point, rgb: Int = 0xFFFFFF) {
-        canvas.pixel(p.x, p.y, rgb)
+        canvas.pixel(p.x.toInt(), p.y.toInt(), rgb)
     }
 
     fun circle(x: Int, y: Int, r: Int, rgb: Int = 0xFFFFFF) {
@@ -64,10 +63,6 @@ class Engine(private val canvas: Canvas) {
     }
 
     fun clear(rgb: Int = 0x000000) {
-        for (y in 0..height()) {
-            for (x in 0..width()) {
-                pixel(Point(x, y), rgb)
-            }
-        }
+        canvas.clear(rgb)
     }
 }
