@@ -6,7 +6,6 @@ import kotlin.math.absoluteValue
 import kotlin.math.cos
 import kotlin.math.sin
 
-
 // The only function we need is to draw single pixels
 // on a canvas. Everything else will be implemented
 // by our own functions and algorithms.
@@ -25,6 +24,14 @@ class Engine(private val canvas: Canvas) {
             val dy = sin(angle * PI / 180.0)
 
             pixel(Point((x + dx * r).toInt(), (y + dy * r).toInt()), rgb)
+        }
+    }
+
+    // TODO(mlesniak) Use extension function
+    fun model(model: Model, scale: Float) {
+        for (point in model.vertices) {
+            val p = point * scale + Point(width() / 2, height() / 2, 0)
+            pixel(p)
         }
     }
 

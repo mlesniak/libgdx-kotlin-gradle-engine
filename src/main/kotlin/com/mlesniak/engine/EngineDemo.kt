@@ -42,12 +42,7 @@ class EngineDemo : Renderer {
         // engine.line(Point(cx, cy), Point(dx, dy))
         // angle += 0.001
 
-        // TODO(mlesniak) Use extension function
-        val scale = 20.0f
-        for (point in model.vertices) {
-            val p = point * scale + Point(cx, cy, 0)
-            engine.pixel(p)
-        }
+        engine.model(model, 20f)
 
         if (tick % 30 == 0) {
             println(Gdx.graphics.framesPerSecond)
