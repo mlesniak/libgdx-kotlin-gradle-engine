@@ -34,7 +34,7 @@ class EngineDemo : Renderer {
 
         val dx = cx + (cos(angle * 180.0/PI) * radius).toInt()
         val dy = cy + (sin(angle * 180.0/PI) * radius).toInt()
-        engine.line(cx, cy, dx, dy, 0xFFFF00)
+        engine.line(Point(cx, cy), Point(dx, dy), 0xFFFF00)
         angle += 0.001
     }
 }
