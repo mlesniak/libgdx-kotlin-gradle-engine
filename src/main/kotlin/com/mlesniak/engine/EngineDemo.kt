@@ -15,18 +15,12 @@ class EngineDemo : Renderer {
     }
 
     override fun draw(engine: Engine) {
-        // for (y in 0..engine.height()) {
-        //     for (x in 0..engine.width()) {
-        //         engine.pixel(x, y, Random.nextInt())
-        //     }
-        // }
-
-        engine.clear(0x000000)
+        engine.clear()
 
         val cx = engine.width() / 2
         val cy = engine.height() / 2
 
-        engine.circle(cx, cy, radius, 0xFF0000)
+        engine.circle(cx, cy, radius)
         radius += 1 * dir
         if (radius > 100 || radius < 0) {
             dir *= -1
@@ -34,7 +28,7 @@ class EngineDemo : Renderer {
 
         val dx = cx + (cos(angle * 180.0/PI) * radius).toInt()
         val dy = cy + (sin(angle * 180.0/PI) * radius).toInt()
-        engine.line(Point(cx, cy), Point(dx, dy), 0xFFFF00)
+        engine.line(Point(cx, cy), Point(dx, dy))
         angle += 0.001
     }
 }

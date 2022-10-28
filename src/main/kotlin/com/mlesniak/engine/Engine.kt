@@ -16,11 +16,11 @@ class Engine(private val canvas: Canvas) {
     fun height() = canvas.height()
     fun width() = canvas.width()
 
-    fun pixel(p: Point, rgb: Int) {
+    fun pixel(p: Point, rgb: Int = 0xFFFFFF) {
         canvas.pixel(p.x, p.y, rgb)
     }
 
-    fun circle(x: Int, y: Int, r: Int, rgb: Int) {
+    fun circle(x: Int, y: Int, r: Int, rgb: Int = 0xFFFFFF) {
         for (angle in 0..360) {
             val dx = cos(angle * PI / 180.0)
             val dy = sin(angle * PI / 180.0)
@@ -30,7 +30,7 @@ class Engine(private val canvas: Canvas) {
     }
 
     // Source: https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
-    fun line(p0: Point, p1: Point, rgb: Int) {
+    fun line(p0: Point, p1: Point, rgb: Int = 0xFFFFFF) {
         val dx = (p0.x - p1.x).absoluteValue
         val sx = if (p0.x < p1.x) 1 else -1
         val dy = -(p1.y - p0.y).absoluteValue
@@ -63,7 +63,7 @@ class Engine(private val canvas: Canvas) {
         }
     }
 
-    fun clear(rgb: Int) {
+    fun clear(rgb: Int = 0x000000) {
         for (y in 0..height()) {
             for (x in 0..width()) {
                 pixel(Point(x, y), rgb)
