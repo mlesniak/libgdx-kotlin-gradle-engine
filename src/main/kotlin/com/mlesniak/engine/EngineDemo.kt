@@ -20,7 +20,9 @@ class EngineDemo : Renderer {
     private lateinit var model: Model
 
     override fun setup() {
-        model = Model.load("models/example.obj")
+        model = Model.load("models/lamp.obj")
+        // model = Model.load("models/teapot.obj")
+        // model = Model.load("models/skyscraper.obj")
     }
 
     override fun draw(engine: Engine) {
@@ -28,21 +30,34 @@ class EngineDemo : Renderer {
 
         val cx = engine.width() / 2
         val cy = engine.height() / 2
+        //
+        // engine.circle(cx, cy, radius)
+        // radius += 1 * dir
+        // if (radius > 100 || radius < 0) {
+        //     dir *= -1
+        // }
+        //
+        // val dx = cx + (cos(angle * 180.0/PI) * radius).toInt()
+        // val dy = cy + (sin(angle * 180.0/PI) * radius).toInt()
+        // engine.line(Point(cx, cy), Point(dx, dy))
+        // angle += 0.001
 
-        engine.circle(cx, cy, radius)
-        radius += 1 * dir
-        if (radius > 100 || radius < 0) {
-            dir *= -1
+        // TODO(mlesniak) Use extension function
+        val scale = 20.0f
+        for (point in model.vertices) {
+            val p = point * scale + Point(cx, cy, 0)
+            engine.pixel(p)
         }
-
-        val dx = cx + (cos(angle * 180.0/PI) * radius).toInt()
-        val dy = cy + (sin(angle * 180.0/PI) * radius).toInt()
-        engine.line(Point(cx, cy), Point(dx, dy))
-        angle += 0.001
 
         if (tick % 30 == 0) {
             println(Gdx.graphics.framesPerSecond)
         }
         tick++
     }
+
+    fun draw(model: Model, scale: Float) {
+        // Ignore z-coordinate for now
+    }
+
 }
+
