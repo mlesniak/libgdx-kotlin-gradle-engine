@@ -14,7 +14,7 @@ class Canvas(private val pixmap: Pixmap) {
 
     // For performance reasons.
     fun clear(rgb: Int) {
-        pixmap.setColor(rgb)
+        pixmap.setColor(rgb shl 8 or 0xFF)
         pixmap.fill()
     }
 }
