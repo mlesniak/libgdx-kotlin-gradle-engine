@@ -6,7 +6,7 @@ import kotlin.math.absoluteValue
 import kotlin.math.cos
 import kotlin.math.sin
 
-data class Point(val x: Int, val y: Int)
+data class Point(val x: Int, val y: Int, val z: Int = 0)
 
 // The only function we need is to draw single pixels
 // on a canvas. Everything else will be implemented
