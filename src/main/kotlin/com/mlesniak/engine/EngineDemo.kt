@@ -26,19 +26,19 @@ class EngineDemo : Renderer {
     override fun draw(engine: Engine) {
         engine.clear()
 
-        // val cx = engine.width() / 2
-        // val cy = engine.height() / 2
-        //
-        // engine.circle(cx, cy, radius)
-        // radius += 1 * dir
-        // if (radius > 100 || radius < 0) {
-        //     dir *= -1
-        // }
-        //
-        // val dx = cx + (cos(angle * 180.0/PI) * radius).toInt()
-        // val dy = cy + (sin(angle * 180.0/PI) * radius).toInt()
-        // engine.line(Point(cx, cy), Point(dx, dy))
-        // angle += 0.001
+        val cx = engine.width() / 2
+        val cy = engine.height() / 2
+
+        engine.circle(cx, cy, radius)
+        radius += 1 * dir
+        if (radius > 100 || radius < 0) {
+            dir *= -1
+        }
+
+        val dx = cx + (cos(angle * 180.0/PI) * radius).toInt()
+        val dy = cy + (sin(angle * 180.0/PI) * radius).toInt()
+        engine.line(Point(cx, cy), Point(dx, dy))
+        angle += 0.001
 
         if (tick % 30 == 0) {
             println(Gdx.graphics.framesPerSecond)
