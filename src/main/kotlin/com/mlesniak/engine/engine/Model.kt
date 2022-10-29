@@ -23,3 +23,9 @@ class Model(val vertices: List<Point>) {
     }
 }
 
+fun Engine.model(model: Model, scale: Float) {
+    for (point in model.vertices) {
+        val p = point * scale + Point(width() / 2, height() / 2, 0)
+        pixel(p)
+    }
+}

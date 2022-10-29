@@ -27,14 +27,6 @@ class Engine(private val canvas: Canvas) {
         }
     }
 
-    // TODO(mlesniak) Use extension function
-    fun model(model: Model, scale: Float) {
-        for (point in model.vertices) {
-            val p = point * scale + Point(width() / 2, height() / 2, 0)
-            pixel(p)
-        }
-    }
-
     // Source: https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
     fun line(p0: Point, p1: Point, rgb: Int = 0xFFFFFF) {
         val dx = (p0.x - p1.x).absoluteValue
@@ -73,3 +65,4 @@ class Engine(private val canvas: Canvas) {
         canvas.clear(rgb)
     }
 }
+

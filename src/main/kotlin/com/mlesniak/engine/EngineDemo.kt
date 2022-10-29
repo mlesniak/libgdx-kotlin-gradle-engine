@@ -4,11 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.mlesniak.engine.core.Renderer
 import com.mlesniak.engine.engine.Engine
 import com.mlesniak.engine.engine.Model
-import com.mlesniak.engine.engine.Point
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
-import kotlin.random.Random
+import com.mlesniak.engine.engine.model
 
 class EngineDemo : Renderer {
     private var tick = 0;
