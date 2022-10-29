@@ -7,7 +7,7 @@ import com.mlesniak.engine.engine.Model
 import com.mlesniak.engine.engine.model
 
 class EngineDemo : Renderer {
-    private var tick = 0;
+    private var tick = 0
 
     private var radius = 0
     private var dir = 1
