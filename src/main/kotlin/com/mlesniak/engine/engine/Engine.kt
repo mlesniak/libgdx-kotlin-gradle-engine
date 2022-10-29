@@ -17,7 +17,7 @@ class Engine(private val canvas: Canvas) {
     fun height() = canvas.height()
     fun width() = canvas.width()
 
-    fun pixel(p: Point, rgb: Int = 0xFFFFFF) {
+    fun pixel(p: Vector, rgb: Int = 0xFFFFFF) {
         // TODO(mlesniak) Apply projection matrix to every point here
         canvas.pixel(p.x.toInt(), p.y.toInt(), rgb)
     }
@@ -27,12 +27,12 @@ class Engine(private val canvas: Canvas) {
             val dx = cos(angle * PI / 180.0)
             val dy = sin(angle * PI / 180.0)
 
-            pixel(Point((x + dx * r).toInt(), (y + dy * r).toInt()), rgb)
+            pixel(Vector((x + dx * r).toInt(), (y + dy * r).toInt()), rgb)
         }
     }
 
     // Source: https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
-    fun line(p0: Point, p1: Point, rgb: Int = 0xFFFFFF) {
+    fun line(p0: Vector, p1: Vector, rgb: Int = 0xFFFFFF) {
         val dx = (p0.x - p1.x).absoluteValue
         val sx = if (p0.x < p1.x) 1 else -1
         val dy = -(p1.y - p0.y).absoluteValue
@@ -45,7 +45,7 @@ class Engine(private val canvas: Canvas) {
         var error = dx + dy
 
         while (true) {
-            pixel(Point(x0, y0), rgb)
+            pixel(Vector(x0, y0), rgb)
             if (x0 == p1x && y0 == p1y) {
                 break
             }

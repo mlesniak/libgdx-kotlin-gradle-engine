@@ -6,7 +6,7 @@ import java.util.regex.Pattern
 
 // This is not a good name...
 class Model(
-    val vertices: List<Point>,
+    val vertices: List<Vector>,
     val faces: List<List<Int>>,
 ) {
     companion object {
@@ -19,7 +19,7 @@ class Model(
                     it.subList(1, 4)
                         .map { v -> v.toFloat() }
                 }
-                .map { plist -> Point(plist[0], plist[1], plist[2]) }
+                .map { plist -> Vector(plist[0], plist[1], plist[2]) }
 
             val faces = lines
                 .filter { line -> line.startsWith("f ") }
@@ -41,8 +41,8 @@ fun Engine.model(model: Model, scale: Float) {
             val p2 = model.vertices[face[(vi + 1) % face.size] - 1]
 
             // Hack until we have proper matrices.
-            val p1h = p1 * scale + Point(width() / 2, height() / 2, 0)
-            val p2h = p2 * scale + Point(width() / 2, height() / 2, 0)
+            val p1h = p1.scalar(scale) + Vector(width() / 2, height() / 2, 0)
+            val p2h = p2.scalar(scale) + Vector(width() / 2, height() / 2, 0)
 
             line(p1h, p2h)
         }

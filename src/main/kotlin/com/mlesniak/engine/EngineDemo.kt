@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx
 import com.mlesniak.engine.core.Renderer
 import com.mlesniak.engine.engine.Engine
 import com.mlesniak.engine.engine.Model
-import com.mlesniak.engine.engine.Point
 import com.mlesniak.engine.engine.model
 
 class EngineDemo : Renderer {
