@@ -7,6 +7,8 @@ import kotlin.math.cos
 import kotlin.math.roundToInt
 import kotlin.math.sin
 
+// TODO(mlesniak) Use bytebuffer instead of single pixels which is even cooler
+
 // The only function we need is to draw single pixels
 // on a canvas. Everything else will be implemented
 // by our own functions and algorithms.
@@ -16,6 +18,7 @@ class Engine(private val canvas: Canvas) {
     fun width() = canvas.width()
 
     fun pixel(p: Point, rgb: Int = 0xFFFFFF) {
+        // TODO(mlesniak) Apply projection matrix to every point here
         canvas.pixel(p.x.toInt(), p.y.toInt(), rgb)
     }
 
