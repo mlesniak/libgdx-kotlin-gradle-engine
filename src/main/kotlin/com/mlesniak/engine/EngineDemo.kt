@@ -45,10 +45,5 @@ class EngineDemo : Renderer {
         }
         tick++
     }
-
-    fun draw(model: Model, scale: Float) {
-        // Ignore z-coordinate for now
-    }
-
 }
 
