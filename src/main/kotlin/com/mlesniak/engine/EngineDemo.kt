@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.mlesniak.engine.core.Renderer
 import com.mlesniak.engine.engine.Engine
 import com.mlesniak.engine.engine.Model
+import com.mlesniak.engine.engine.Point
 import com.mlesniak.engine.engine.model
 
 class EngineDemo : Renderer {
@@ -38,7 +39,7 @@ class EngineDemo : Renderer {
         // engine.line(Point(cx, cy), Point(dx, dy))
         // angle += 0.001
 
-        engine.model(model, 20f)
+        engine.model(model, 30f)
 
         if (tick % 30 == 0) {
             println(Gdx.graphics.framesPerSecond)

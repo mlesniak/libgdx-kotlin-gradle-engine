@@ -4,6 +4,7 @@ import com.mlesniak.engine.core.Canvas
 import kotlin.math.PI
 import kotlin.math.absoluteValue
 import kotlin.math.cos
+import kotlin.math.roundToInt
 import kotlin.math.sin
 
 // The only function we need is to draw single pixels
@@ -34,25 +35,27 @@ class Engine(private val canvas: Canvas) {
         val dy = -(p1.y - p0.y).absoluteValue
         val sy = if (p0.y < p1.y) 1 else -1
 
-        var x0 = p0.x
-        var y0 = p0.y
+        var x0 = p0.x.roundToInt()
+        var y0 = p0.y.roundToInt()
+        val p1x = p1.x.roundToInt()
+        val p1y = p1.y.roundToInt()
         var error = dx + dy
 
         while (true) {
             pixel(Point(x0, y0), rgb)
-            if (x0 == p1.x && y0 == p1.y) {
+            if (x0 == p1x && y0 == p1y) {
                 break
             }
             val e2 = 2 * error
             if (e2 >= dy) {
-                if (x0 == p1.x) {
+                if (x0 == p1x) {
                     break
                 }
                 error += dy
                 x0 += sx
             }
             if (e2 <= dx) {
-                if (y0 == p1.y) {
+                if (y0 == p1y) {
                     break
                 }
                 error += dx
