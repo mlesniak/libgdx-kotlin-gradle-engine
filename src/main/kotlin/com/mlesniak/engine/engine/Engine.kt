@@ -32,7 +32,7 @@ class Engine(private val canvas: Canvas) {
     }
 
     // Source: https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
-    fun line(p0: Vector, p1: Vector, rgb: Int = 0xFFFFFF) {
+    fun line(p0: Vector, p1: Vector, rgb: Int = 0x555555) {
         val dx = (p0.x - p1.x).absoluteValue
         val sx = if (p0.x < p1.x) 1 else -1
         val dy = -(p1.y - p0.y).absoluteValue
@@ -67,7 +67,7 @@ class Engine(private val canvas: Canvas) {
         }
     }
 
-    fun clear(rgb: Int = 0x000000) {
+    fun clear(rgb: Int = 0xCCCCCC) {
         canvas.clear(rgb)
     }
 }
