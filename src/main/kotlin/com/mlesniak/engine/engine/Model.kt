@@ -35,6 +35,7 @@ class Model(
 }
 
 fun Engine.model(model: Model, scale: Float) {
+    // TODO(mlesniak) We should convert all points before drawing the line(s).
     for (face in model.faces) {
         for (vi in face.indices) {
             val p1 = model.vertices[face[vi] - 1]
