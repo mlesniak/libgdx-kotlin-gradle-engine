@@ -31,6 +31,12 @@ class Engine(private val canvas: Canvas) {
         }
     }
 
+    fun triangle(v1: Vector, v2: Vector, v3: Vector, rgb: Int = 0x555555) {
+        line(v1, v2, rgb)
+        line(v2, v3, rgb)
+        line(v3, v1, rgb)
+    }
+
     // Source: https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
     fun line(p0: Vector, p1: Vector, rgb: Int = 0x555555) {
         val dx = (p0.x - p1.x).absoluteValue

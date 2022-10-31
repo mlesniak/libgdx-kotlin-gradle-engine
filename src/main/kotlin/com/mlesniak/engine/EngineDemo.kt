@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx
 import com.mlesniak.engine.core.Renderer
 import com.mlesniak.engine.engine.Engine
 import com.mlesniak.engine.engine.Model
+import com.mlesniak.engine.engine.Vector
 import com.mlesniak.engine.engine.model
 
 class EngineDemo : Renderer {
@@ -26,6 +27,13 @@ class EngineDemo : Renderer {
 
         val cx = engine.width() / 2
         val cy = engine.height() / 2
+
+        engine.triangle(
+            Vector(400, 200),
+            Vector(410, 410),
+            Vector(270, 90),
+            0xFF0000,
+        )
 
         if (tick % 60 == 0) {
             println(Gdx.graphics.framesPerSecond)
