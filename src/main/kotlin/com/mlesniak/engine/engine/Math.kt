@@ -13,32 +13,6 @@ data class Vector(
     operator fun plus(v: Vector): Vector = Vector(this.x + v.x, this.y + v.y, this.z + v.z + this.w + v.w)
 }
 
-// TODO(mlesniak) remove me
-fun main() {
-    val m1 = arrayOf(
-        arrayOf(5f, 2f, 6f, 1f),
-        arrayOf(0f, 6f, 2f, 0f),
-        arrayOf(3f, 8f, 1f, 4f),
-        arrayOf(1f, 8f, 5f, 6f),
-    )
-    val m2 = arrayOf(
-        arrayOf(7f, 5f, 8f, 0f),
-        arrayOf(1f, 8f, 2f, 6f),
-        arrayOf(9f, 4f, 3f, 8f),
-        arrayOf(5f, 3f, 7f, 9f),
-    )
-
-    println((m1 * m2).debug())
-
-    val m3 = arrayOf(
-        arrayOf(1f, 0f, 2f, 0f),
-        arrayOf(0f, 3f, 0f, 4f),
-        arrayOf(0f, 0f, 5f, 0f),
-        arrayOf(6f, 0f, 0f, 7f),
-    )
-    println(m3 * Vector(2, 5, 1, 8))
-}
-
 typealias Matrix = Array<Array<Float>>
 
 operator fun Matrix.times(m: Matrix): Matrix {
