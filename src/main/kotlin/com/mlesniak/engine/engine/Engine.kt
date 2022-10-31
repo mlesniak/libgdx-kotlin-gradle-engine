@@ -14,8 +14,8 @@ import kotlin.math.sin
 // by our own functions and algorithms.
 @Suppress("MemberVisibilityCanBePrivate")
 class Engine(private val canvas: Canvas) {
-    fun height() = canvas.height()
-    fun width() = canvas.width()
+    fun height() = canvas.height
+    fun width() = canvas.width
 
     fun pixel(p: Vector, rgb: Int = 0xFFFFFF) {
         // TODO(mlesniak) Apply projection matrix to every point here

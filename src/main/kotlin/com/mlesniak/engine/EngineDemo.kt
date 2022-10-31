@@ -4,7 +4,11 @@ import com.badlogic.gdx.Gdx
 import com.mlesniak.engine.core.Renderer
 import com.mlesniak.engine.engine.Engine
 import com.mlesniak.engine.engine.Model
+import com.mlesniak.engine.engine.Vector
 import com.mlesniak.engine.engine.model
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 
 class EngineDemo : Renderer {
     private var tick = 0
@@ -26,19 +30,19 @@ class EngineDemo : Renderer {
 
         val cx = engine.width() / 2
         val cy = engine.height() / 2
-        //
+
+        engine.model(model, 30f)
+
         // engine.circle(cx, cy, radius)
         // radius += 1 * dir
-        // if (radius > 100 || radius < 0) {
+        // if (radius > 200 || radius < 0) {
         //     dir *= -1
         // }
         //
         // val dx = cx + (cos(angle * 180.0/PI) * radius).toInt()
         // val dy = cy + (sin(angle * 180.0/PI) * radius).toInt()
-        // engine.line(Point(cx, cy), Point(dx, dy))
-        // angle += 0.001
-
-        engine.model(model, 30f)
+        // engine.line(Vector(cx, cy), Vector(dx, dy))
+        // angle += 0.005
 
         if (tick % 30 == 0) {
             println(Gdx.graphics.framesPerSecond)
