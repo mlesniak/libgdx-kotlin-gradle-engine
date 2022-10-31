@@ -25,7 +25,7 @@ class Model(
                 .filter { line -> line.startsWith("f ") }
                 .map { it.split(Pattern.compile(" +")) }
                 .map {
-                    it.subList(1, it.size).map { i -> i.toInt() }
+                    it.subList(1, it.size).map { i -> i.split("/")[0].toInt() }
                 }
 
             println("parsed model")

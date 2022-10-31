@@ -17,7 +17,7 @@ class EngineDemo : Renderer {
     private lateinit var model: Model
 
     override fun setup() {
-        model = Model.load("models/lamp.obj")
+        model = Model.load("models/head.obj")
         // model = Model.load("models/teapot.obj")
         // model = Model.load("models/skyscraper.obj")
     }
@@ -28,12 +28,7 @@ class EngineDemo : Renderer {
         val cx = engine.width() / 2
         val cy = engine.height() / 2
 
-        engine.triangle(
-            Vector(400, 200),
-            Vector(410, 410),
-            Vector(270, 90),
-            0xFF0000,
-        )
+        engine.model(model, 300f)
 
         if (tick % 60 == 0) {
             println(Gdx.graphics.framesPerSecond)
