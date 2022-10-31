@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.mlesniak.engine.engine.Engine
-import com.mlesniak.engine.engine.Matrix
-import com.mlesniak.engine.engine.Vector
 
 class Core(private val renderer: Renderer) : ApplicationAdapter() {
     private lateinit var batch: SpriteBatch
@@ -19,13 +17,6 @@ class Core(private val renderer: Renderer) : ApplicationAdapter() {
         batch = SpriteBatch()
         pixmap = Pixmap(Gdx.graphics.width, Gdx.graphics.height, Pixmap.Format.RGB888)
         engine = Engine(Canvas(pixmap))
-
-        val v = Matrix(
-            1f, 0f, 0f,
-            0f, 1f, 0f,
-            0f, 0f, 1f,
-        ) * Vector(1f, 2f, 3f)
-        println(v)
 
         renderer.setup()
     }
