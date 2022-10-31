@@ -44,7 +44,14 @@ fun Engine.model(model: Model, scale: Float) {
             val p1h = p1.scalar(scale) + Vector(width() / 2, height() / 2, 0)
             val p2h = p2.scalar(scale) + Vector(width() / 2, height() / 2, 0)
 
-            line(p1h, p2h)
+            val p1h2 = p1h.copy(
+                y = 600 - (p1h.y)
+            )
+            val p2h2 = p2h.copy(
+                y = 600 - (p2h.y)
+            )
+
+            line(p1h2, p2h2)
         }
     }
 }
