@@ -1,5 +1,9 @@
 package com.mlesniak.engine.engine
 
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
+
 data class Vector(
     val x: Float,
     val y: Float,
@@ -18,7 +22,6 @@ typealias Matrix = Array<Array<Float>>
 operator fun Matrix.times(m: Matrix): Matrix {
     val k: Array<Array<Float>> = Array(4) { y ->
         Array(4) { x ->
-            println("x=$x, y=$y")
             this[y][0] * m[0][x] + this[y][1] * m[1][x] + this[y][2] * m[2][x] + this[y][3] * m[3][x]
         }
     }
@@ -45,12 +48,13 @@ fun Array<Array<Float>>.debug(): String {
 
 // TODO(mlesniak) Not happy with that name.
 object BaseMatrix {
-    fun identity(): Matrix = arrayOf(
-        arrayOf(1f, 0f, 0f, 0f),
-        arrayOf(0f, 1f, 0f, 0f),
-        arrayOf(0f, 0f, 1f, 0f),
-        arrayOf(0f, 0f, 0f, 1f),
-    )
+    fun identity(): Matrix =
+        arrayOf(
+            arrayOf(1f, 0f, 0f, 0f),
+            arrayOf(0f, 1f, 0f, 0f),
+            arrayOf(0f, 0f, 1f, 0f),
+            arrayOf(0f, 0f, 0f, 1f),
+        )
 
     fun translate(dx: Float, dy: Float, dz: Float = 0.0f): Matrix {
         return arrayOf(
@@ -60,5 +64,34 @@ object BaseMatrix {
             arrayOf(0f, 0f, 0f, 1f),
         )
     }
+
+    fun scale(sx: Float, sy: Float, sz: Float): Matrix =
+        arrayOf(
+            arrayOf(sx, 0f, 0f, 0f),
+            arrayOf(0f, sy, 0f, 0f),
+            arrayOf(0f, 0f, sz, 0f),
+            arrayOf(0f, 0f, 0f, 1f),
+        )
+
+    fun rotateY(deg: Float): Matrix {
+        val rad = (deg * 180f / PI)
+        return arrayOf(
+            arrayOf(cos(rad).toFloat(), 0f, sin(rad).toFloat(), 0f),
+            arrayOf(0f, 1f, 0f, 0f),
+            arrayOf(-sin(rad).toFloat(), 0f, cos(rad).toFloat(), 0f),
+            arrayOf(0f, 0f, 0f, 1f),
+        )
+    }
+
+    fun rotateZ(deg: Float): Matrix {
+        val rad = (deg * 180f / PI)
+        return arrayOf(
+            arrayOf(cos(rad).toFloat(), -sin(rad).toFloat(), 0f, 0f),
+            arrayOf(sin(rad).toFloat(), cos(rad).toFloat(), 0f, 0f),
+            arrayOf(0f, 0f, 1f, 0f),
+            arrayOf(0f, 0f, 0f, 1f),
+        )
+    }
+
 }
 

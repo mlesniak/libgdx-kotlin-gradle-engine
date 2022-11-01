@@ -14,15 +14,15 @@ import kotlin.math.sin
 // by our own functions and algorithms.
 @Suppress("MemberVisibilityCanBePrivate")
 class Engine(private val canvas: Canvas) {
-    var projectionMatrix: Matrix = BaseMatrix.translate((canvas.width / 2).toFloat(), -(canvas.height /2).toFloat())
+    var projectionMatrix: Matrix =
+        BaseMatrix.scale(1.0f, 1.0f, 1.0f) *
+        BaseMatrix.translate((canvas.width / 2).toFloat(), (canvas.height /2).toFloat())
 
     fun height() = canvas.height
     fun width() = canvas.width
 
     fun pixel(p: Vector, rgb: Int = 0xFFFFFF) {
-        val pt = projectionMatrix * p
-        println(pt)
-        canvas.pixel(pt.x.toInt(), pt.y.toInt(), rgb)
+        canvas.pixel(p.x.toInt(), p.y.toInt(), rgb)
     }
 
     fun circle(x: Int, y: Int, r: Int, rgb: Int = 0xFFFFFF) {

@@ -4,22 +4,17 @@ import com.badlogic.gdx.Gdx
 import com.mlesniak.engine.core.Renderer
 import com.mlesniak.engine.engine.Engine
 import com.mlesniak.engine.engine.Model
-import com.mlesniak.engine.engine.Vector
 import com.mlesniak.engine.engine.model
 
 class EngineDemo : Renderer {
     private var tick = 0
 
-    private var radius = 0
-    private var dir = 1
-    private var angle = 0.0
+    private var angle = 0.0f
 
     private lateinit var model: Model
 
     override fun setup() {
         model = Model.load("models/head.obj")
-        // model = Model.load("models/teapot.obj")
-        // model = Model.load("models/skyscraper.obj")
     }
 
     override fun draw(engine: Engine) {
@@ -28,7 +23,8 @@ class EngineDemo : Renderer {
         val cx = engine.width() / 2
         val cy = engine.height() / 2
 
-        engine.model(model, 300f)
+        engine.model(model, angle)
+        angle += 0.001f
 
         if (tick % 60 == 0) {
             println(Gdx.graphics.framesPerSecond)

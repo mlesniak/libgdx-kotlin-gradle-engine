@@ -34,25 +34,20 @@ class Model(
     }
 }
 
-fun Engine.model(model: Model, scale: Float) {
-    // TODO(mlesniak) We should convert all points before drawing the line(s).
+// TODO(mlesniak) Model matrix should be part of the model
+fun Engine.model(model: Model, angle: Float) {
     for (face in model.faces) {
         for (vi in face.indices) {
             val p1 = model.vertices[face[vi] - 1]
             val p2 = model.vertices[face[(vi + 1) % face.size] - 1]
 
             // Hack until we have proper matrices.
-            val p1h = p1 * scale
-            val p2h = p2 * scale
+            val m = BaseMatrix.translate(800.0f/2.0f, 600f/2f, 0f) * BaseMatrix.rotateY(180f) * BaseMatrix.scale(200f, 200f, 200f)
+            val p1h = m * p1
+            val p2h = m * p2
+            // println(angle)
 
-            val p1h2 = p1h.copy(
-                y = 600 - (p1h.y)
-            )
-            val p2h2 = p2h.copy(
-                y = 600 - (p2h.y)
-            )
-
-            line(p1h2, p2h2)
+            line(p1h, p2h)
         }
     }
 }
