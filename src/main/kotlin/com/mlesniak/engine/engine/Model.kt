@@ -42,8 +42,8 @@ fun Engine.model(model: Model, scale: Float) {
             val p2 = model.vertices[face[(vi + 1) % face.size] - 1]
 
             // Hack until we have proper matrices.
-            val p1h = p1 * scale + Vector(width() / 2, height() / 2, 0)
-            val p2h = p2 * scale + Vector(width() / 2, height() / 2, 0)
+            val p1h = p1 * scale
+            val p2h = p2 * scale
 
             val p1h2 = p1h.copy(
                 y = 600 - (p1h.y)

@@ -6,7 +6,7 @@ data class Vector(
     val z: Float = 0.0f,
     val w: Float = 1.0f,
 ) {
-    constructor(x: Int, y: Int, z: Int = 0, w: Int = 0) : this(x.toFloat(), y.toFloat(), z.toFloat(), w.toFloat())
+    constructor(x: Int, y: Int, z: Int = 0, w: Int = 1) : this(x.toFloat(), y.toFloat(), z.toFloat(), w.toFloat())
 
     operator fun times(f: Float): Vector = Vector(x * f, y * f, z * f, w * f)
 
@@ -43,10 +43,22 @@ fun Array<Array<Float>>.debug(): String {
     return sb.toString()
 }
 
-fun identity(): Matrix = arrayOf(
-    arrayOf(1f, 0f, 0f, 0f),
-    arrayOf(0f, 1f, 0f, 0f),
-    arrayOf(0f, 0f, 1f, 0f),
-    arrayOf(0f, 0f, 0f, 1f),
-)
+// TODO(mlesniak) Not happy with that name.
+object BaseMatrix {
+    fun identity(): Matrix = arrayOf(
+        arrayOf(1f, 0f, 0f, 0f),
+        arrayOf(0f, 1f, 0f, 0f),
+        arrayOf(0f, 0f, 1f, 0f),
+        arrayOf(0f, 0f, 0f, 1f),
+    )
+
+    fun translate(dx: Float, dy: Float, dz: Float = 0.0f): Matrix {
+        return arrayOf(
+            arrayOf(1f, 0f, 0f, dx),
+            arrayOf(0f, 1f, 0f, dy),
+            arrayOf(0f, 0f, 1f, dz),
+            arrayOf(0f, 0f, 0f, 1f),
+        )
+    }
+}
 
