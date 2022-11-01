@@ -74,7 +74,7 @@ object BaseMatrix {
         )
 
     fun rotateY(deg: Float): Matrix {
-        val rad = (deg * 180f / PI)
+        val rad = (deg * PI / 180f)
         return arrayOf(
             arrayOf(cos(rad).toFloat(), 0f, sin(rad).toFloat(), 0f),
             arrayOf(0f, 1f, 0f, 0f),
@@ -84,7 +84,7 @@ object BaseMatrix {
     }
 
     fun rotateZ(deg: Float): Matrix {
-        val rad = (deg * 180f / PI)
+        val rad = (deg * PI/180f)
         return arrayOf(
             arrayOf(cos(rad).toFloat(), -sin(rad).toFloat(), 0f, 0f),
             arrayOf(sin(rad).toFloat(), cos(rad).toFloat(), 0f, 0f),

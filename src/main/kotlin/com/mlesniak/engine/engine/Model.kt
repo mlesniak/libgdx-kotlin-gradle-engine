@@ -1,5 +1,6 @@
 package com.mlesniak.engine.engine
 
+import com.badlogic.gdx.Gdx
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.regex.Pattern
@@ -34,18 +35,22 @@ class Model(
     }
 }
 
-// TODO(mlesniak) Model matrix should be part of the model
+// TODO(mlesniak) Model matrix should be part of the model?
 fun Engine.model(model: Model, angle: Float) {
     for (face in model.faces) {
         for (vi in face.indices) {
             val p1 = model.vertices[face[vi] - 1]
             val p2 = model.vertices[face[(vi + 1) % face.size] - 1]
 
-            // Hack until we have proper matrices.
-            val m = BaseMatrix.translate(800.0f/2.0f, 600f/2f, 0f) * BaseMatrix.rotateY(180f) * BaseMatrix.scale(200f, 200f, 200f)
-            val p1h = m * p1
-            val p2h = m * p2
+            // val m = BaseMatrix.translate(800.0f/2.0f, 600f/2f, 0f) * BaseMatrix.rotateY(0f) * BaseMatrix.scale(200f, 200f, 200f)
+            val m1 = BaseMatrix.identity() * BaseMatrix.translate(400f, 300f) * BaseMatrix.rotateZ(-90f) * BaseMatrix.translate(-400f, -300f)
+            val p1h = m1 * p1
+
+            val m2 = BaseMatrix.identity()
+            val p2h = m1 * p2
             // println(angle)
+
+            println("p1h=$p1h       p2h=$p2h")
 
             line(p1h, p2h)
         }

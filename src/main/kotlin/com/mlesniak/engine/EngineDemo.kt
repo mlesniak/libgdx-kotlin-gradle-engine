@@ -15,6 +15,7 @@ class EngineDemo : Renderer {
 
     override fun setup() {
         model = Model.load("models/head.obj")
+        model = Model.load("models/line.obj")
     }
 
     override fun draw(engine: Engine) {
