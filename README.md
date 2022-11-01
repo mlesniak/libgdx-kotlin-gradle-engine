@@ -2,7 +2,7 @@
 
 Work in progress -- no information here yet.
 
-Complete "From scratch software renderer", we just need a function to draw a single pixel (and, for performance reasons, something to clear the whole window). Everythin else, e.g. projections, line drawing, etc. is done by the engine.
+Complete "From scratch software renderer", we just need a function to draw a single pixel (and, for performance reasons, something to clear the whole window). Everything else, e.g. projections, line drawing, etc. is done by the engine.
 
 ```kotlin
 class Canvas(private val pixmap: Pixmap) {
