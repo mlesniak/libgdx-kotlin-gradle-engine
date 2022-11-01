@@ -15,7 +15,6 @@ class EngineDemo : Renderer {
 
     override fun setup() {
         model = Model.load("models/head.obj")
-        model = Model.load("models/line.obj")
     }
 
     override fun draw(engine: Engine) {
@@ -25,7 +24,7 @@ class EngineDemo : Renderer {
         val cy = engine.height() / 2
 
         engine.model(model, angle)
-        angle += 0.001f
+        angle += 1f
 
         if (tick % 60 == 0) {
             println(Gdx.graphics.framesPerSecond)

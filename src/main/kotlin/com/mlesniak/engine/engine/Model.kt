@@ -42,15 +42,13 @@ fun Engine.model(model: Model, angle: Float) {
             val p1 = model.vertices[face[vi] - 1]
             val p2 = model.vertices[face[(vi + 1) % face.size] - 1]
 
-            // val m = BaseMatrix.translate(800.0f/2.0f, 600f/2f, 0f) * BaseMatrix.rotateY(0f) * BaseMatrix.scale(200f, 200f, 200f)
-            val m1 = BaseMatrix.identity() * BaseMatrix.translate(400f, 300f) * BaseMatrix.rotateZ(-90f) * BaseMatrix.translate(-400f, -300f)
+            val m1 =
+                BaseMatrix.rotateZ(180f) *
+                BaseMatrix.translate(-400f, -300f) *
+                BaseMatrix.scale(300f, 300f, 300f) *
+                BaseMatrix.rotateY(angle)
             val p1h = m1 * p1
-
-            val m2 = BaseMatrix.identity()
             val p2h = m1 * p2
-            // println(angle)
-
-            println("p1h=$p1h       p2h=$p2h")
 
             line(p1h, p2h)
         }
