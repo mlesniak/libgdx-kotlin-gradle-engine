@@ -19,6 +19,7 @@ class EngineDemo : Renderer {
         model = Model.load("models/head.obj")
     }
 
+    // TODO(mlesniak) Non-orthogonal matrix
     override fun draw(engine: Engine) {
         engine.clear()
 
@@ -28,7 +29,8 @@ class EngineDemo : Renderer {
         val projection =
             BaseMatrix.translate(400f, 300f) *
                 BaseMatrix.scale(200f, 200f, 200f) *
-                BaseMatrix.rotateZ(angle) *
+                BaseMatrix.rotateZ(angle + 180f) *
+                BaseMatrix.rotateX(angle) *
                 BaseMatrix.rotateY(angle)
         engine.model(model, projection)
         angle += 1f
