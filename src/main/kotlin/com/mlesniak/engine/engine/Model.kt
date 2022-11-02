@@ -1,5 +1,9 @@
 package com.mlesniak.engine.engine
 
+import com.mlesniak.engine.engine.BaseMatrix.rotateY
+import com.mlesniak.engine.engine.BaseMatrix.rotateZ
+import com.mlesniak.engine.engine.BaseMatrix.scale
+import com.mlesniak.engine.engine.BaseMatrix.translate
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.regex.Pattern
@@ -42,10 +46,11 @@ fun Engine.model(model: Model, angle: Float) {
             val p2 = model.vertices[face[(vi + 1) % face.size] - 1]
 
             val m1 =
-                BaseMatrix.rotateZ(180f) *
-                    BaseMatrix.translate(-400f, -300f) *
-                    BaseMatrix.scale(300f, 300f, 300f) *
-                    BaseMatrix.rotateY(angle)
+                translate(400f, 300f) *
+                    scale(200f, 200f, 200f) *
+                    rotateZ(180f) *
+                    rotateY(angle)
+
             val p1h = m1 * p1
             val p2h = m1 * p2
 
