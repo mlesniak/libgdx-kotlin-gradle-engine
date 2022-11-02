@@ -16,7 +16,7 @@ import kotlin.math.sin
 class Engine(private val canvas: Canvas) {
     var projectionMatrix: Matrix =
         BaseMatrix.scale(1.0f, 1.0f, 1.0f) *
-        BaseMatrix.translate((canvas.width / 2).toFloat(), (canvas.height /2).toFloat())
+            BaseMatrix.translate((canvas.width / 2).toFloat(), (canvas.height / 2).toFloat())
 
     fun height() = canvas.height
     fun width() = canvas.width
@@ -80,4 +80,3 @@ class Engine(private val canvas: Canvas) {
         canvas.clear(rgb)
     }
 }
-

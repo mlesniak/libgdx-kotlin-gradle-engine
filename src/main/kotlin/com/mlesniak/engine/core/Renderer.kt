@@ -13,4 +13,3 @@ interface Renderer {
 
     fun draw(engine: Engine)
 }
-

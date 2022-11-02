@@ -84,7 +84,7 @@ object BaseMatrix {
     }
 
     fun rotateZ(deg: Float): Matrix {
-        val rad = (deg * PI/180f)
+        val rad = (deg * PI / 180f)
         return arrayOf(
             arrayOf(cos(rad).toFloat(), -sin(rad).toFloat(), 0f, 0f),
             arrayOf(sin(rad).toFloat(), cos(rad).toFloat(), 0f, 0f),
@@ -92,6 +92,4 @@ object BaseMatrix {
             arrayOf(0f, 0f, 0f, 1f),
         )
     }
-
 }
-

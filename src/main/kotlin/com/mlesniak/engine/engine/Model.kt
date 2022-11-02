@@ -1,6 +1,5 @@
 package com.mlesniak.engine.engine
 
-import com.badlogic.gdx.Gdx
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.regex.Pattern
@@ -44,9 +43,9 @@ fun Engine.model(model: Model, angle: Float) {
 
             val m1 =
                 BaseMatrix.rotateZ(180f) *
-                BaseMatrix.translate(-400f, -300f) *
-                BaseMatrix.scale(300f, 300f, 300f) *
-                BaseMatrix.rotateY(angle)
+                    BaseMatrix.translate(-400f, -300f) *
+                    BaseMatrix.scale(300f, 300f, 300f) *
+                    BaseMatrix.rotateY(angle)
             val p1h = m1 * p1
             val p2h = m1 * p2
 
