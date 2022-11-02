@@ -7,6 +7,9 @@ import com.mlesniak.engine.engine.Engine
 import com.mlesniak.engine.engine.Model
 import com.mlesniak.engine.engine.model
 import com.mlesniak.engine.engine.times
+import kotlin.math.PI
+import kotlin.math.absoluteValue
+import kotlin.math.sin
 
 class EngineDemo : Renderer {
     private var tick = 0
@@ -26,9 +29,10 @@ class EngineDemo : Renderer {
         val cx = engine.width() / 2
         val cy = engine.height() / 2
 
+        val scale = ((sin(angle * PI/180.0) * 200)).toFloat().absoluteValue + 100f
         val projection =
             BaseMatrix.translate(400f, 300f) *
-                BaseMatrix.scale(200f, 200f, 200f) *
+                BaseMatrix.scale(scale, scale, scale) *
                 BaseMatrix.rotateZ(angle + 180f) *
                 BaseMatrix.rotateX(angle) *
                 BaseMatrix.rotateY(angle)
