@@ -2,9 +2,11 @@ package com.mlesniak.engine
 
 import com.badlogic.gdx.Gdx
 import com.mlesniak.engine.core.Renderer
+import com.mlesniak.engine.engine.BaseMatrix
 import com.mlesniak.engine.engine.Engine
 import com.mlesniak.engine.engine.Model
 import com.mlesniak.engine.engine.model
+import com.mlesniak.engine.engine.times
 
 class EngineDemo : Renderer {
     private var tick = 0
@@ -23,7 +25,12 @@ class EngineDemo : Renderer {
         val cx = engine.width() / 2
         val cy = engine.height() / 2
 
-        engine.model(model, angle)
+        val projection =
+            BaseMatrix.translate(400f, 300f) *
+                BaseMatrix.scale(200f, 200f, 200f) *
+                BaseMatrix.rotateZ(angle) *
+                BaseMatrix.rotateY(angle)
+        engine.model(model, projection)
         angle += 1f
 
         if (tick % 60 == 0) {

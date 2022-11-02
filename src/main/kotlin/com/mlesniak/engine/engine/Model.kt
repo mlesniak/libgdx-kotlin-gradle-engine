@@ -1,9 +1,5 @@
 package com.mlesniak.engine.engine
 
-import com.mlesniak.engine.engine.BaseMatrix.rotateY
-import com.mlesniak.engine.engine.BaseMatrix.rotateZ
-import com.mlesniak.engine.engine.BaseMatrix.scale
-import com.mlesniak.engine.engine.BaseMatrix.translate
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.regex.Pattern
@@ -39,20 +35,14 @@ class Model(
 }
 
 // TODO(mlesniak) Model matrix should be part of the model?
-fun Engine.model(model: Model, angle: Float) {
+fun Engine.model(model: Model, projection: Matrix) {
     for (face in model.faces) {
         for (vi in face.indices) {
             val p1 = model.vertices[face[vi] - 1]
             val p2 = model.vertices[face[(vi + 1) % face.size] - 1]
 
-            val m1 =
-                translate(400f, 300f) *
-                    scale(200f, 200f, 200f) *
-                    rotateZ(180f) *
-                    rotateY(angle)
-
-            val p1h = m1 * p1
-            val p2h = m1 * p2
+            val p1h = projection * p1
+            val p2h = projection * p2
 
             line(p1h, p2h)
         }
