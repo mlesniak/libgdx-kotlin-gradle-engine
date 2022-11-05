@@ -37,14 +37,19 @@ class EngineDemo : Renderer {
         //         BaseMatrix.rotateZ(angle + 180f) *
         //         BaseMatrix.rotateX(angle) *
         //         BaseMatrix.rotateY(angle)
-        // engine.model(model, projection)
-        // angle += 1f
+        val scale = 300f
+        val projection =
+            BaseMatrix.translate(400f, 300f) *
+                BaseMatrix.scale(scale, scale, scale) *
+                BaseMatrix.rotateZ(180f)
+        engine.model(model, projection)
+        angle += 1f
 
-        engine.triangle(
-            Vector(tick % 800, 300),
-            Vector(500, tick % 600),
-            Vector(450, (tick % 600) / 2),
-        )
+        // engine.triangle(
+        //     Vector(tick % 800, 300),
+        //     Vector(500, tick % 600),
+        //     Vector(450, (tick % 600) / 2),
+        // )
 
         if (tick % 60 == 0) {
             println("FPS:" + Gdx.graphics.framesPerSecond)

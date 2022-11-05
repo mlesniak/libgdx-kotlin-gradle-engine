@@ -6,6 +6,7 @@ import kotlin.math.absoluteValue
 import kotlin.math.cos
 import kotlin.math.roundToInt
 import kotlin.math.sin
+import kotlin.random.Random
 
 // TODO(mlesniak) Use bytebuffer instead of single pixels which is even cooler
 
@@ -87,8 +88,7 @@ class Engine(private val canvas: Canvas) {
         var curx2 = p0.x
 
         for (y in p0.y.toInt() until p1.y.toInt()) {
-            // line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), rgb)
-            line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), 0xFF0000)
+            line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), rgb)
             curx1 += invslope1
             curx2 += invslope2
         }
@@ -101,8 +101,7 @@ class Engine(private val canvas: Canvas) {
         var curx2 = p2.x
 
         for (y in p2.y.toInt() downTo p0.y.toInt()) {
-            // line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), rgb)
-            line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), 0x00FF00)
+            line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), rgb)
             curx1 -= invslope1
             curx2 -= invslope2
         }
@@ -118,9 +117,6 @@ class Engine(private val canvas: Canvas) {
         } else if (p0.y == p1.y) {
             fillTopFlatTriangle(p0, p1, p2, rgb)
         } else {
-            // Vertice v4 = new Vertice(
-            //       (int)(vt1.x + ((float)(vt2.y - vt1.y) / (float)(vt3.y - vt1.y)) * (vt3.x - vt1.x)), vt2.y);
-
             val middle = Vector(
                 p0.x + ((p1.y - p0.y) / (p2.y - p0.y)) * (p2.x - p0.x),
                 p1.y

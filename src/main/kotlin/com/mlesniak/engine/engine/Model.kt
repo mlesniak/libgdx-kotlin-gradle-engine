@@ -28,23 +28,21 @@ class Model(
                     it.subList(1, it.size).map { i -> i.split("/")[0].toInt() }
                 }
 
-            println("parsed model")
             return Model(vertices, faces)
         }
     }
 }
 
-// TODO(mlesniak) Model matrix should be part of the model?
 fun Engine.model(model: Model, projection: Matrix) {
     for (face in model.faces) {
-        for (vi in face.indices) {
-            val p1 = model.vertices[face[vi] - 1]
-            val p2 = model.vertices[face[(vi + 1) % face.size] - 1]
+        val p1 = model.vertices[face[0] - 1]
+        val p2 = model.vertices[face[1] - 1]
+        val p3 = model.vertices[face[2] - 1]
 
-            val p1h = projection * p1
-            val p2h = projection * p2
+        val p1h = projection * p1
+        val p2h = projection * p2
+        val p3h = projection * p3
 
-            line(p1h, p2h)
-        }
+        triangle(p1h, p2h, p3h)
     }
 }
