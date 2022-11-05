@@ -68,7 +68,7 @@ fun Engine.model(model: Model, projection: Matrix) {
         val intensity = nh.normalize() * light
         if (intensity > 0) {
             val color = (255.0 * intensity).toInt()
-            val rgb = color shl 16 or color shl 8 or color
+            val rgb = (color shl 16) or (color shl 8) or color
             triangle(p1h, p2h, p3h, rgb)
         }
     }
