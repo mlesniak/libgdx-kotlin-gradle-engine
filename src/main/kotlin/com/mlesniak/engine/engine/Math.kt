@@ -3,6 +3,7 @@ package com.mlesniak.engine.engine
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
+import kotlin.math.sqrt
 
 data class Vector(
     val x: Float,
@@ -14,7 +15,19 @@ data class Vector(
 
     operator fun times(f: Float): Vector = Vector(x * f, y * f, z * f, w * f)
 
+    // Dot product.
+    // Should this be a method since using * might be confusing?
+    operator fun times(v: Vector): Float = x*v.x + y * v.y + z*v.z
+
     operator fun plus(v: Vector): Vector = Vector(this.x + v.x, this.y + v.y, this.z + v.z + this.w + v.w)
+
+    fun normalize(): Vector {
+        return this * (1.0f / length())
+    }
+
+    private fun length(): Float {
+        return sqrt(x * x + y * y + z * z)
+    }
 }
 
 typealias Matrix = Array<Array<Float>>

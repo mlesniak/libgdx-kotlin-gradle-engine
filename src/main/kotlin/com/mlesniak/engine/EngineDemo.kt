@@ -39,11 +39,14 @@ class EngineDemo : Renderer {
         //         BaseMatrix.rotateY(angle)
         val scale = 300f
         val projection =
-            BaseMatrix.translate(400f, 300f) *
+            BaseMatrix.translate(400f, 350f) *
                 BaseMatrix.scale(scale, scale, scale) *
-                BaseMatrix.rotateZ(180f)
-        engine.model(model, projection)
+                BaseMatrix.rotateZ(180f) *
+                BaseMatrix.rotateY(angle)
+                engine.model(model, projection)
         angle += 1f
+
+        // TODO(mlesniak) Z buffer!
 
         // engine.triangle(
         //     Vector(tick % 800, 300),
