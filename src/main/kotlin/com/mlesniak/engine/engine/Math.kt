@@ -17,7 +17,17 @@ data class Vector(
 
     // Dot product.
     // Should this be a method since using * might be confusing?
-    operator fun times(v: Vector): Float = x*v.x + y * v.y + z*v.z
+    operator fun times(v: Vector): Float = x * v.x + y * v.y + z * v.z
+
+    // Cross product
+    // Source: https://www.khronos.org/opengl/wiki/Calculating_a_Surface_Normal
+    fun cross(v: Vector): Vector {
+        // vec3 cross(const vec3 &v1, const vec3 &v2) {
+        //     return vec<3>{v1.y*v2.z - v1.z*v2.y, v1.z*v2.x - v1.x*v2.z, v1.x*v2.y - v1.y*v2.x};
+        // }
+
+        return Vector(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x)
+    }
 
     operator fun plus(v: Vector): Vector = Vector(this.x + v.x, this.y + v.y, this.z + v.z + this.w + v.w)
 
@@ -28,6 +38,8 @@ data class Vector(
     private fun length(): Float {
         return sqrt(x * x + y * y + z * z)
     }
+
+    operator fun minus(v: Vector): Vector = Vector(x - v.x, y - v.y, z - v.z)
 }
 
 typealias Matrix = Array<Array<Float>>

@@ -63,7 +63,17 @@ fun Engine.model(model: Model, projection: Matrix) {
         // Normals refer to vectors
         // but we're rendering the faces here
         // take first vector for playing around.
-        val normal = model.normals[face[0] - 1]
+        val normal = (p3h - p1h).cross(p2h - p1h).normalize()
+
+        // val n: Vec3f = world_coords.get(2) - world_coords.get(0) ^ world_coords.get(1) - world_coords.get(0)
+        // n.normalize()
+        // Cross product of two vectors
+        /*
+        vec3 cross(const vec3 &v1, const vec3 &v2) {
+            return vec<3>{v1.y*v2.z - v1.z*v2.y, v1.z*v2.x - v1.x*v2.z, v1.x*v2.y - v1.y*v2.x};
+        }
+         */
+
         val nh = projection * normal
         val intensity = nh.normalize() * light
         if (intensity > 0) {

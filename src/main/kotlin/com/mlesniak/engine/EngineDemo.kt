@@ -20,7 +20,7 @@ class EngineDemo : Renderer {
     private lateinit var model: Model
 
     override fun setup() {
-        model = Model.load("models/head.obj")
+        model = Model.load("models/lamp.obj")
     }
 
     // TODO(mlesniak) Non-orthogonal matrix
@@ -37,9 +37,9 @@ class EngineDemo : Renderer {
         //         BaseMatrix.rotateZ(angle + 180f) *
         //         BaseMatrix.rotateX(angle) *
         //         BaseMatrix.rotateY(angle)
-        val scale = 300f
+        val scale = 45f
         val projection =
-            BaseMatrix.translate(400f, 350f) *
+            BaseMatrix.translate(400f, 400f) *
                 BaseMatrix.scale(scale, scale, scale) *
                 BaseMatrix.rotateZ(180f) *
                 BaseMatrix.rotateY(angle)
