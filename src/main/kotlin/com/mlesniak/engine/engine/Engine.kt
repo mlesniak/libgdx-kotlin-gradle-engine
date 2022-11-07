@@ -20,6 +20,8 @@ import kotlin.random.Random
 //   is not).
 @Suppress("MemberVisibilityCanBePrivate")
 class Engine(private val canvas: Canvas) {
+    private var zbuffer = Array(canvas.height * canvas.width) { Float.MIN_VALUE }
+
     var projectionMatrix: Matrix =
         BaseMatrix.scale(1.0f, 1.0f, 1.0f) *
             BaseMatrix.translate((canvas.width / 2).toFloat(), (canvas.height / 2).toFloat())
@@ -28,8 +30,20 @@ class Engine(private val canvas: Canvas) {
     fun width() = canvas.width
 
     fun pixel(p: Vector, rgb: Int = 0xFFFFFF) {
-        canvas.pixel(p.x.toInt(), p.y.toInt(), rgb)
+        val py = p.y.toInt()
+        val px = p.x.toInt()
+        val curz = zbuffer[py * canvas.height + px]
+        if (p.z > curz) {
+            canvas.pixel(px, py, rgb)
+            zbuffer[py * canvas.height + px] = p.z
+        }
     }
+
+    fun clear(rgb: Int = 0xCCCCCC) {
+        canvas.clear(rgb)
+        zbuffer = Array(canvas.height * canvas.width) { Float.MIN_VALUE }
+    }
+
 
     fun circle(x: Int, y: Int, r: Int, rgb: Int = 0xFFFFFF) {
         for (angle in 0..360) {
@@ -47,6 +61,8 @@ class Engine(private val canvas: Canvas) {
         val dy = -(p1.y - p0.y).absoluteValue
         val sy = if (p0.y < p1.y) 1 else -1
 
+        // TODO(mlesniak) Interpolate z coordinate here
+
         var x0 = p0.x.roundToInt()
         var y0 = p0.y.roundToInt()
         val p1x = p1.x.roundToInt()
@@ -54,7 +70,9 @@ class Engine(private val canvas: Canvas) {
         var error = dx + dy
 
         while (true) {
-            pixel(Vector(x0, y0), rgb)
+            // pixel(Vector(x0, y0), rgb)
+            // Hack: We use average before, always the same value.
+            pixel(Vector(x0, y0, p0.z.toInt()), rgb)
             if (x0 == p1x && y0 == p1y) {
                 break
             }
@@ -76,10 +94,6 @@ class Engine(private val canvas: Canvas) {
         }
     }
 
-    fun clear(rgb: Int = 0xCCCCCC) {
-        canvas.clear(rgb)
-    }
-
     // Explanation of the algorithm at http://www.sunshine2k.de/coding/java/TriangleRasterization/TriangleRasterization.html#algo2
     private fun fillBottomFlatTriangle(p0: Vector, p1: Vector, p2: Vector, rgb: Int) {
         val invslope1 = (p1.x - p0.x) / (p1.y - p0.y)
@@ -87,8 +101,13 @@ class Engine(private val canvas: Canvas) {
         var curx1 = p0.x
         var curx2 = p0.x
 
+        // Hack
+        val zAverage = ((p0.z + p1.z + p2.z) / 3.0f).toInt()
+
         for (y in p0.y.toInt() until p1.y.toInt()) {
-            line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), rgb)
+            // line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), rgb)
+            // Hack, not perfect.
+            line(Vector(curx1.toInt(), y, zAverage), Vector(curx2.toInt(), y, zAverage), rgb)
             curx1 += invslope1
             curx2 += invslope2
         }
@@ -101,7 +120,9 @@ class Engine(private val canvas: Canvas) {
         var curx2 = p2.x
 
         for (y in p2.y.toInt() downTo p0.y.toInt()) {
-            line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), rgb)
+            // line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), rgb)
+            // Hack, not perfect.
+            line(Vector(curx1.toInt(), y, p0.z.toInt()), Vector(curx2.toInt(), y, p0.z.toInt()), rgb)
             curx1 -= invslope1
             curx2 -= invslope2
         }
@@ -121,6 +142,7 @@ class Engine(private val canvas: Canvas) {
                 p0.x + ((p1.y - p0.y) / (p2.y - p0.y)) * (p2.x - p0.x),
                 p1.y
             )
+            // println("$middle, $p0, $p1, $p2")
             fillBottomFlatTriangle(p0, p1, middle, rgb)
             fillTopFlatTriangle(p1, middle, p2, rgb)
         }

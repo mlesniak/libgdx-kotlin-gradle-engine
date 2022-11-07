@@ -20,7 +20,7 @@ class EngineDemo : Renderer {
     private lateinit var model: Model
 
     override fun setup() {
-        model = Model.load("models/lamp.obj")
+        model = Model.load("models/head.obj")
     }
 
     // TODO(mlesniak) Non-orthogonal matrix
@@ -30,29 +30,23 @@ class EngineDemo : Renderer {
         val cx = engine.width() / 2
         val cy = engine.height() / 2
 
-        // val scale = ((sin(angle * PI/180.0) * 200)).toFloat().absoluteValue + 100f
-        // val projection =
-        //     BaseMatrix.translate(400f, 300f) *
-        //         BaseMatrix.scale(scale, scale, scale) *
-        //         BaseMatrix.rotateZ(angle + 180f) *
-        //         BaseMatrix.rotateX(angle) *
-        //         BaseMatrix.rotateY(angle)
-        val scale = 45f
+        val scale = ((sin(angle * PI / 180.0) * 200)).toFloat().absoluteValue + 100f
         val projection =
-            BaseMatrix.translate(400f, 400f) *
+            BaseMatrix.translate(400f, 300f) *
                 BaseMatrix.scale(scale, scale, scale) *
-                BaseMatrix.rotateZ(180f) *
+                BaseMatrix.rotateZ(angle + 180f) *
+                BaseMatrix.rotateX(angle) *
                 BaseMatrix.rotateY(angle)
-                engine.model(model, projection)
+        // val scale = 300f
+        // val projection =
+        //     BaseMatrix.translate(400f, 325f) *
+        //         BaseMatrix.scale(scale, scale, scale) *
+        //         BaseMatrix.rotateZ(180f) *
+        //         BaseMatrix.rotateY(angle)
+        engine.model(model, projection)
         angle += 1f
 
         // TODO(mlesniak) Z buffer!
-
-        // engine.triangle(
-        //     Vector(tick % 800, 300),
-        //     Vector(500, tick % 600),
-        //     Vector(450, (tick % 600) / 2),
-        // )
 
         if (tick % 60 == 0) {
             println("FPS:" + Gdx.graphics.framesPerSecond)
