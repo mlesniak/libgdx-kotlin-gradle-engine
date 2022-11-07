@@ -23,4 +23,6 @@ class Canvas(private val pixmap: Pixmap) {
 }
 ```
 
+z-Buffer implementation is still work in progress ;-)
+
 ![Current progress](animation.gif)
