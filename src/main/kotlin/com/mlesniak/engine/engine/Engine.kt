@@ -6,7 +6,6 @@ import kotlin.math.absoluteValue
 import kotlin.math.cos
 import kotlin.math.roundToInt
 import kotlin.math.sin
-import kotlin.random.Random
 
 // TODO(mlesniak) Use bytebuffer instead of single pixels which is even cooler
 
@@ -32,11 +31,11 @@ class Engine(private val canvas: Canvas) {
     fun pixel(p: Vector, rgb: Int = 0xFFFFFF) {
         val py = p.y.toInt()
         val px = p.x.toInt()
-        val curz = zbuffer[py * canvas.height + px]
-        if (p.z > curz) {
+        // val curz = zbuffer[py * canvas.height + px]
+        // if (p.z > curz) {
             canvas.pixel(px, py, rgb)
-            zbuffer[py * canvas.height + px] = p.z
-        }
+            // zbuffer[py * canvas.height + px] = p.z
+        // }
     }
 
     fun clear(rgb: Int = 0xCCCCCC) {
@@ -147,4 +146,11 @@ class Engine(private val canvas: Canvas) {
             fillTopFlatTriangle(p1, middle, p2, rgb)
         }
     }
+
+    fun wireTriangle(p0: Vector, p1: Vector, p2: Vector, rgb: Int = 0x555555) {
+       line(p0, p1, rgb)
+       line(p1, p2, rgb)
+       line(p2, p0, rgb)
+    }
+
 }

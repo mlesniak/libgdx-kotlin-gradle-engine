@@ -61,12 +61,12 @@ fun Engine.model(model: Model, projection: Matrix) {
         val p3h = projection * p3
 
         val normal = (p3h - p1h).cross(p2h - p1h).normalize()
-        val nh = projection * normal
-        val intensity = nh.normalize() * light
+        val intensity = normal * light
         if (intensity > 0) {
             val color = (255.0 * intensity).toInt()
             val rgb = (color shl 16) or (color shl 8) or color
             triangle(p1h, p2h, p3h, rgb)
+            // wireTriangle(p1h, p2h, p3h)
         }
     }
 }

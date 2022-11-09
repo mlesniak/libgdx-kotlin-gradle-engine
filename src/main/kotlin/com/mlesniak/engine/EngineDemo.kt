@@ -30,13 +30,15 @@ class EngineDemo : Renderer {
         val cx = engine.width() / 2
         val cy = engine.height() / 2
 
-        val scale = ((sin(angle * PI / 180.0) * 200)).toFloat().absoluteValue + 100f
+        // val scale = ((sin(angle * PI / 180.0) * 200)).toFloat().absoluteValue + 100f
+        val scale = 250f
         val projection =
             BaseMatrix.translate(400f, 300f) *
                 BaseMatrix.scale(scale, scale, scale) *
-                BaseMatrix.rotateZ(angle + 180f) *
-                BaseMatrix.rotateX(angle) *
+                BaseMatrix.rotateZ(180f) *
+                BaseMatrix.rotateX(20f) *
                 BaseMatrix.rotateY(angle)
+                // BaseMatrix.rotateY(45f)
         // val scale = 300f
         // val projection =
         //     BaseMatrix.translate(400f, 325f) *
