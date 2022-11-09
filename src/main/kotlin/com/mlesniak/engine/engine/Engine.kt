@@ -31,18 +31,17 @@ class Engine(private val canvas: Canvas) {
     fun pixel(p: Vector, rgb: Int = 0xFFFFFF) {
         val py = p.y.toInt()
         val px = p.x.toInt()
-        // val curz = zbuffer[py * canvas.height + px]
-        // if (p.z > curz) {
+        val curz = zbuffer[py * canvas.height + px]
+        if (p.z > curz) {
             canvas.pixel(px, py, rgb)
-            // zbuffer[py * canvas.height + px] = p.z
-        // }
+            zbuffer[py * canvas.height + px] = p.z
+        }
     }
 
     fun clear(rgb: Int = 0xCCCCCC) {
         canvas.clear(rgb)
         zbuffer = Array(canvas.height * canvas.width) { Float.MIN_VALUE }
     }
-
 
     fun circle(x: Int, y: Int, r: Int, rgb: Int = 0xFFFFFF) {
         for (angle in 0..360) {
@@ -139,7 +138,8 @@ class Engine(private val canvas: Canvas) {
         } else {
             val middle = Vector(
                 p0.x + ((p1.y - p0.y) / (p2.y - p0.y)) * (p2.x - p0.x),
-                p1.y
+                p1.y,
+                p1.z,
             )
             // println("$middle, $p0, $p1, $p2")
             fillBottomFlatTriangle(p0, p1, middle, rgb)
@@ -148,9 +148,8 @@ class Engine(private val canvas: Canvas) {
     }
 
     fun wireTriangle(p0: Vector, p1: Vector, p2: Vector, rgb: Int = 0x555555) {
-       line(p0, p1, rgb)
-       line(p1, p2, rgb)
-       line(p2, p0, rgb)
+        line(p0, p1, rgb)
+        line(p1, p2, rgb)
+        line(p2, p0, rgb)
     }
-
 }
