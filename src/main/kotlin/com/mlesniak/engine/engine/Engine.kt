@@ -117,6 +117,7 @@ class Engine(private val canvas: Canvas) {
             // line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), rgb)
             // Hack, not perfect.
             line(Vector(curx1, y.toFloat() , curz1), Vector(curx2, y.toFloat(), curz2), rgb)
+            // line(Vector(curx1, y.toFloat() , curz1), Vector(curx2, y.toFloat(), curz2), 0xFF0000)
             curx1 += invslope1
             curx2 += invslope2
             curz1 += zslope1
@@ -130,15 +131,16 @@ class Engine(private val canvas: Canvas) {
         var curx1 = p2.x
         var curx2 = p2.x
 
-        val zslope1 = (p1.z - p0.z) / (p1.y - p0.y)
-        val zslope2 = (p2.z - p0.z) / (p2.y - p0.y)
-        var curz1 = p0.z
-        var curz2 = p0.z
+        val zslope1 = (p2.z - p0.z) / (p2.y - p0.y)
+        val zslope2 = (p2.z - p1.z) / (p2.y - p1.y)
+        var curz1 = p2.z
+        var curz2 = p2.z
 
         for (y in p2.y.toInt() downTo p0.y.toInt()) {
             // line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), rgb)
             // Hack, not perfect.
             line(Vector(curx1, y.toFloat() , curz1), Vector(curx2, y.toFloat(), curz2), rgb)
+            // line(Vector(curx1, y.toFloat() , curz1), Vector(curx2, y.toFloat(), curz2), 0x00FF00)
             curx1 -= invslope1
             curx2 -= invslope2
             curz1 -= zslope1

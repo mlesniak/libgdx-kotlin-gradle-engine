@@ -47,7 +47,7 @@ class EngineDemo : Renderer {
         // val projection = BaseMatrix.identity() *
         //     BaseMatrix.scale(scale, scale, scale)
         engine.model(model, projection)
-        angle += 1f
+        angle += 0.5f
 
         // TODO(mlesniak) Z buffer!
 
