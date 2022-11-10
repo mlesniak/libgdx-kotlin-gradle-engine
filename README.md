@@ -1,6 +1,6 @@
 # Overview
 
-Work in progress -- no information here yet.
+Work in progress -- no information here yet ... and there's a lot of cleanup necessary, currently totally in hack mode.
 
 Complete "From scratch software renderer", we just need a function to draw a single pixel (and, for performance reasons, something to clear the whole window). Everything else, e.g. projections, line drawing, etc. is done by the engine.
 

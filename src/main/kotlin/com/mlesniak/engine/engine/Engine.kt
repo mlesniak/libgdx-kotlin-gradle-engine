@@ -19,7 +19,7 @@ import kotlin.math.sin
 //   is not).
 @Suppress("MemberVisibilityCanBePrivate")
 class Engine(private val canvas: Canvas) {
-    private var zbuffer = Array(canvas.height * canvas.width) { Float.MIN_VALUE }
+    private var zbuffer = Array(canvas.height * canvas.width) { -Float.MAX_VALUE }
 
     var projectionMatrix: Matrix =
         BaseMatrix.scale(1.0f, 1.0f, 1.0f) *
@@ -32,6 +32,7 @@ class Engine(private val canvas: Canvas) {
         val py = p.y.toInt()
         val px = p.x.toInt()
         val curz = zbuffer[py * canvas.height + px]
+        // println(p.z)
         if (p.z > curz) {
             canvas.pixel(px, py, rgb)
             zbuffer[py * canvas.height + px] = p.z
@@ -40,7 +41,7 @@ class Engine(private val canvas: Canvas) {
 
     fun clear(rgb: Int = 0xCCCCCC) {
         canvas.clear(rgb)
-        zbuffer = Array(canvas.height * canvas.width) { Float.MIN_VALUE }
+        zbuffer = Array(canvas.height * canvas.width) { -Float.MAX_VALUE }
     }
 
     fun circle(x: Int, y: Int, r: Int, rgb: Int = 0xFFFFFF) {
@@ -53,6 +54,7 @@ class Engine(private val canvas: Canvas) {
     }
 
     // Source: https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
+    // Not sure if passing Ints here already looses precision for the z buffer coordinate?
     fun line(p0: Vector, p1: Vector, rgb: Int = 0x555555) {
         val dx = (p0.x - p1.x).absoluteValue
         val sx = if (p0.x < p1.x) 1 else -1
@@ -60,6 +62,9 @@ class Engine(private val canvas: Canvas) {
         val sy = if (p0.y < p1.y) 1 else -1
 
         // TODO(mlesniak) Interpolate z coordinate here
+        var curz = p0.z
+        var dz = (p1.z - p0.z).absoluteValue / dx
+        var sz = if (p1.z > p0.z) 1 else -1
 
         var x0 = p0.x.roundToInt()
         var y0 = p0.y.roundToInt()
@@ -70,7 +75,8 @@ class Engine(private val canvas: Canvas) {
         while (true) {
             // pixel(Vector(x0, y0), rgb)
             // Hack: We use average before, always the same value.
-            pixel(Vector(x0, y0, p0.z.toInt()), rgb)
+            pixel(Vector(x0.toFloat(), y0.toFloat(), curz), rgb)
+            curz = curz + dz*sz
             if (x0 == p1x && y0 == p1y) {
                 break
             }
@@ -99,15 +105,22 @@ class Engine(private val canvas: Canvas) {
         var curx1 = p0.x
         var curx2 = p0.x
 
+        val zslope1 = (p1.z - p0.z) / (p1.y - p0.y)
+        val zslope2 = (p2.z - p0.z) / (p2.y - p0.y)
+        var curz1 = p0.z
+        var curz2 = p0.z
+
         // Hack
         val zAverage = ((p0.z + p1.z + p2.z) / 3.0f).toInt()
 
         for (y in p0.y.toInt() until p1.y.toInt()) {
             // line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), rgb)
             // Hack, not perfect.
-            line(Vector(curx1.toInt(), y, zAverage), Vector(curx2.toInt(), y, zAverage), rgb)
+            line(Vector(curx1, y.toFloat() , curz1), Vector(curx2, y.toFloat(), curz2), rgb)
             curx1 += invslope1
             curx2 += invslope2
+            curz1 += zslope1
+            curz2 += zslope2
         }
     }
 
@@ -117,12 +130,19 @@ class Engine(private val canvas: Canvas) {
         var curx1 = p2.x
         var curx2 = p2.x
 
+        val zslope1 = (p1.z - p0.z) / (p1.y - p0.y)
+        val zslope2 = (p2.z - p0.z) / (p2.y - p0.y)
+        var curz1 = p0.z
+        var curz2 = p0.z
+
         for (y in p2.y.toInt() downTo p0.y.toInt()) {
             // line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), rgb)
             // Hack, not perfect.
-            line(Vector(curx1.toInt(), y, p0.z.toInt()), Vector(curx2.toInt(), y, p0.z.toInt()), rgb)
+            line(Vector(curx1, y.toFloat() , curz1), Vector(curx2, y.toFloat(), curz2), rgb)
             curx1 -= invslope1
             curx2 -= invslope2
+            curz1 -= zslope1
+            curz2 -= zslope2
         }
     }
 

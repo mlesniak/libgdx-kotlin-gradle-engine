@@ -68,5 +68,7 @@ fun Engine.model(model: Model, projection: Matrix) {
             triangle(p1h, p2h, p3h, rgb)
             // wireTriangle(p1h, p2h, p3h)
         }
+        // println("$p1h $p2h $p3h")
+        // triangle(p1h, p2h, p3h, 0xFF0000)
     }
 }

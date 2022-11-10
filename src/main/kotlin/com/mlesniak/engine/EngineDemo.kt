@@ -21,6 +21,7 @@ class EngineDemo : Renderer {
 
     override fun setup() {
         model = Model.load("models/head.obj")
+        // model = Model.load("models/zbuffer-debug.obj")
     }
 
     // TODO(mlesniak) Non-orthogonal matrix
@@ -38,13 +39,13 @@ class EngineDemo : Renderer {
                 BaseMatrix.rotateZ(180f) *
                 BaseMatrix.rotateX(20f) *
                 BaseMatrix.rotateY(angle)
-                // BaseMatrix.rotateY(45f)
-        // val scale = 300f
+                BaseMatrix.rotateY(45f)
+        // val scale = 150f
         // val projection =
-        //     BaseMatrix.translate(400f, 325f) *
-        //         BaseMatrix.scale(scale, scale, scale) *
-        //         BaseMatrix.rotateZ(180f) *
-        //         BaseMatrix.rotateY(angle)
+        //     BaseMatrix.translate(300f, 200f) *
+        //         BaseMatrix.scale(scale, scale, scale)
+        // val projection = BaseMatrix.identity() *
+        //     BaseMatrix.scale(scale, scale, scale)
         engine.model(model, projection)
         angle += 1f
 
