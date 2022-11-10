@@ -23,6 +23,6 @@ class Canvas(private val pixmap: Pixmap) {
 }
 ```
 
-z-Buffer implementation is still work in progress ;-)
+Still unexplainable horizontal lines while rendering -- this will be fun to debug...
 
 ![Current progress](animation.gif)
