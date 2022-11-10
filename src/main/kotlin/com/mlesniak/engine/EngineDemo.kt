@@ -38,7 +38,7 @@ class EngineDemo : Renderer {
                 BaseMatrix.scale(scale, scale, scale) *
                 BaseMatrix.rotateZ(180f) *
                 BaseMatrix.rotateX(20f) *
-                BaseMatrix.rotateY(angle)
+                BaseMatrix.rotateY(43f)
                 BaseMatrix.rotateY(45f)
         // val scale = 150f
         // val projection =
