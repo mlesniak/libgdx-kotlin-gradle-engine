@@ -100,6 +100,11 @@ class Engine(private val canvas: Canvas) {
 
     // Explanation of the algorithm at http://www.sunshine2k.de/coding/java/TriangleRasterization/TriangleRasterization.html#algo2
     private fun fillBottomFlatTriangle(p0: Vector, p1: Vector, p2: Vector, rgb: Int) {
+        // Let's not draw triangles where the y delta is less than 1
+        if (p1.y - p0.y < 1) {
+            return
+        }
+
         val invslope1 = (p1.x - p0.x) / (p1.y - p0.y)
         val invslope2 = (p2.x - p0.x) / (p2.y - p0.y)
         var curx1 = p0.x
@@ -126,6 +131,11 @@ class Engine(private val canvas: Canvas) {
     }
 
     private fun fillTopFlatTriangle(p0: Vector, p1: Vector, p2: Vector, rgb: Int) {
+        // Let's not draw triangles where the y delta is less than 1
+        if (p2.y - p0.y < 1) {
+            return
+        }
+
         val invslope1 = (p2.x - p0.x) / (p2.y - p0.y)
         val invslope2 = (p2.x - p1.x) / (p2.y - p1.y)
         var curx1 = p2.x
@@ -139,6 +149,13 @@ class Engine(private val canvas: Canvas) {
         for (y in p2.y.toInt() downTo p0.y.toInt()) {
             // line(Vector(curx1.toInt(), y), Vector(curx2.toInt(), y), rgb)
             // Hack, not perfect.
+            // if (curx1 > 450) {
+            //     println("$p0 $p1 $p2")
+            //     println("$curx1 $y")
+            //     println("$invslope1")
+            //     line(Vector(curx1, y.toFloat() , curz1), Vector(curx2, y.toFloat(), curz2), rgb)
+            // }
+
             line(Vector(curx1, y.toFloat() , curz1), Vector(curx2, y.toFloat(), curz2), rgb)
             // line(Vector(curx1, y.toFloat() , curz1), Vector(curx2, y.toFloat(), curz2), 0x00FF00)
             curx1 -= invslope1

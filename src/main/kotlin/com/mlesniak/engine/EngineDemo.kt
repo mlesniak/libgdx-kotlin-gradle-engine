@@ -38,8 +38,8 @@ class EngineDemo : Renderer {
                 BaseMatrix.scale(scale, scale, scale) *
                 BaseMatrix.rotateZ(180f) *
                 BaseMatrix.rotateX(20f) *
-                BaseMatrix.rotateY(43f)
-                BaseMatrix.rotateY(45f)
+                BaseMatrix.rotateY(angle)
+                // BaseMatrix.rotateY(angle)
         // val scale = 150f
         // val projection =
         //     BaseMatrix.translate(300f, 200f) *
@@ -47,7 +47,7 @@ class EngineDemo : Renderer {
         // val projection = BaseMatrix.identity() *
         //     BaseMatrix.scale(scale, scale, scale)
         engine.model(model, projection)
-        angle += 0.5f
+        angle += 1f
 
         // TODO(mlesniak) Z buffer!
 
