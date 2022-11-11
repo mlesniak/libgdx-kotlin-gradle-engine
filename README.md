@@ -23,6 +23,6 @@ class Canvas(private val pixmap: Pixmap) {
 }
 ```
 
-Still unexplainable horizontal lines while rendering -- this will be fun to debug...
+Bug: White Flickering on some triangles (precision problems?) 
 
 ![Current progress](animation.gif)
