@@ -20,7 +20,7 @@ class EngineDemo : Renderer {
     private lateinit var model: Model
 
     override fun setup() {
-        model = Model.load("models/head.obj")
+        model = Model.load("models/cube.obj")
         // model = Model.load("models/zbuffer-debug.obj")
     }
 
@@ -32,14 +32,16 @@ class EngineDemo : Renderer {
         val cy = engine.height() / 2
 
         // val scale = ((sin(angle * PI / 180.0) * 200)).toFloat().absoluteValue + 100f
-        val scale = 250f
+        val scale = 200f
         val projection =
-            BaseMatrix.translate(400f, 300f) *
+            BaseMatrix.translate(400f, 500f) *
                 BaseMatrix.scale(scale, scale, scale) *
                 BaseMatrix.rotateZ(180f) *
                 BaseMatrix.rotateX(20f) *
-                BaseMatrix.rotateY(angle)
-                // BaseMatrix.rotateY(angle)
+                // BaseMatrix.rotateY(78f)
+                // BaseMatrix.rotateY(42f)
+                BaseMatrix.rotateY(943f)
+        // BaseMatrix.rotateY(angle)
         // val scale = 150f
         // val projection =
         //     BaseMatrix.translate(300f, 200f) *
@@ -48,6 +50,7 @@ class EngineDemo : Renderer {
         //     BaseMatrix.scale(scale, scale, scale)
         engine.model(model, projection)
         angle += 1f
+        // println("angle = $angle")
 
         // TODO(mlesniak) Z buffer!
 

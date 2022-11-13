@@ -21,13 +21,22 @@ class Core(private val renderer: Renderer) : ApplicationAdapter() {
         renderer.setup()
     }
 
+    var pause = false
+
     override fun render() { // Later on we will collect all keys and/or mouse events
         // and pass them to the update function.
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit()
         }
-
         renderer.update()
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            pause = !pause
+        }
+        if (pause) {
+            return
+        }
+
         renderer.draw(engine)
 
         val texture = Texture(pixmap)

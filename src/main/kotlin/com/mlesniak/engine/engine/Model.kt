@@ -60,10 +60,10 @@ fun Engine.model(model: Model, projection: Matrix) {
         val p2h = projection * p2
         val p3h = projection * p3
 
-        // val max = 51
-        // if (p1h.y > max || p2h.y > max || p3h.y > max) {
-        //     continue
-        // }
+        val max = 500
+        if (p1h.y > max || p2h.y > max || p3h.y > max) {
+            continue
+        }
         //
         // val m2 = 450
         // if (p1h.x < m2 || p2h.x < m2 || p3h.x < m2) {
