@@ -3,6 +3,7 @@ package com.mlesniak.engine.engine
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.regex.Pattern
+import kotlin.random.Random
 
 // This is not a good name...
 class Model(
@@ -76,7 +77,7 @@ fun Engine.model(model: Model, projection: Matrix) {
             val color = (255.0 * intensity).toInt()
             val rgb = (color shl 16) or (color shl 8) or color
             triangle(p1h, p2h, p3h, rgb)
-            // wireTriangle(p1h, p2h, p3h)
+            // wireTriangle(p1h, p2h, p3h, Random.nextInt())
         }
         // println("$p1h $p2h $p3h")
         // triangle(p1h, p2h, p3h, 0xFF0000)

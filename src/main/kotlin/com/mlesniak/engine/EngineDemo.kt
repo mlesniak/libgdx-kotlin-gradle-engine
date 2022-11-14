@@ -40,7 +40,8 @@ class EngineDemo : Renderer {
                 BaseMatrix.rotateX(20f) *
                 // BaseMatrix.rotateY(78f)
                 // BaseMatrix.rotateY(42f)
-                BaseMatrix.rotateY(943f)
+                BaseMatrix.rotateY(angle)
+        // BaseMatrix.rotateY(943f)
         // BaseMatrix.rotateY(angle)
         // val scale = 150f
         // val projection =
