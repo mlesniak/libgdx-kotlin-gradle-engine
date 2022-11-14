@@ -20,7 +20,8 @@ class EngineDemo : Renderer {
     private lateinit var model: Model
 
     override fun setup() {
-        model = Model.load("models/cube.obj")
+        // model = Model.load("models/cube.obj")
+        model = Model.load("models/head.obj")
         // model = Model.load("models/zbuffer-debug.obj")
     }
 
@@ -34,7 +35,7 @@ class EngineDemo : Renderer {
         // val scale = ((sin(angle * PI / 180.0) * 200)).toFloat().absoluteValue + 100f
         val scale = 200f
         val projection =
-            BaseMatrix.translate(400f, 500f) *
+            BaseMatrix.translate(400f, 300f) *
                 BaseMatrix.scale(scale, scale, scale) *
                 BaseMatrix.rotateZ(180f) *
                 BaseMatrix.rotateX(20f) *
