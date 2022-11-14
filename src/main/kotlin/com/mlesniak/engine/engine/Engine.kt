@@ -253,6 +253,14 @@ class Engine(private val canvas: Canvas) {
         val x02 = interpolate(p0.y, p0.x, p2.y, p2.x)
         val x012 = x01 + x12
 
+        val z01 = interpolate(p0.y, p0.z, p1.y, p1.z)
+        val z12 = interpolate(p1.y, p1.z, p2.y, p2.z)
+        val z02 = interpolate(p0.y, p0.z, p2.y, p2.z)
+        val z012 = z01 + z12
+        // TODO(mlesniak) correct?
+        val zLeft = z02
+        val zRight = z012
+
         if (x02.size < 2) {
             return
         }
@@ -270,11 +278,13 @@ class Engine(private val canvas: Canvas) {
 
         val p0y = p0.y.roundToInt()
         for (y in p0y..p2.y.roundToInt()) {
-            for (x in xLeft[y - p0y].roundToInt()..xRight[y-p0y].roundToInt()) {
-                // TODO(mlesniak) recompute curz
-                pixel(Vector(x.toFloat(), y.toFloat(), 0.0f), rgb)
-            }
+            val zinc = zLeft[y-p0y]/zRight[y-p0y]
+            var z = zLeft[y-p0y]
 
+            for (x in xLeft[y - p0y].roundToInt()..xRight[y-p0y].roundToInt()) {
+                pixel(Vector(x.toFloat(), y.toFloat(), z), rgb)
+                z += zinc
+            }
         }
     }
 
