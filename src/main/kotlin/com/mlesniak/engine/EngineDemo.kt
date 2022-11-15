@@ -1,22 +1,23 @@
 package com.mlesniak.engine
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
+import com.badlogic.gdx.Input.Keys
+import com.mlesniak.engine.core.KeyCode
 import com.mlesniak.engine.core.Renderer
 import com.mlesniak.engine.engine.BaseMatrix
 import com.mlesniak.engine.engine.Engine
 import com.mlesniak.engine.engine.Model
-import com.mlesniak.engine.engine.Vector
 import com.mlesniak.engine.engine.model
 import com.mlesniak.engine.engine.times
-import kotlin.math.PI
-import kotlin.math.absoluteValue
 import kotlin.math.sin
 
 class EngineDemo : Renderer {
+    private var paused = false
+    private var wireframe = false
+
     private var tick = 0
-
     private var angle = 0.0f
-
     private lateinit var model: Model
 
     override fun setup() {
@@ -25,8 +26,14 @@ class EngineDemo : Renderer {
         // model = Model.load("models/zbuffer-debug.obj")
     }
 
-    override fun update(engine: Engine) {
-        if (!engine.paused) {
+    override fun update(pressedKeys: Set<KeyCode>) {
+        when {
+            Keys.ESCAPE in pressedKeys -> Gdx.app.exit()
+            Keys.SPACE in pressedKeys -> paused = !paused
+            Keys.W in pressedKeys -> wireframe = !wireframe
+        }
+
+        if (!paused) {
             angle += 1f
         }
     }
@@ -34,9 +41,6 @@ class EngineDemo : Renderer {
     // TODO(mlesniak) Non-orthogonal matrix
     override fun draw(engine: Engine) {
         engine.clear()
-
-        val cx = engine.width() / 2
-        val cy = engine.height() / 2
 
         // val scale = ((sin(angle * PI / 180.0) * 200)).toFloat().absoluteValue + 100f
         val scale = 300f
@@ -56,7 +60,7 @@ class EngineDemo : Renderer {
         //         BaseMatrix.scale(scale, scale, scale)
         // val projection = BaseMatrix.identity() *
         //     BaseMatrix.scale(scale, scale, scale)
-        engine.model(model, projection)
+        engine.model(model, projection, wireframe)
         // println("angle = $angle")
 
         // TODO(mlesniak) Z buffer!

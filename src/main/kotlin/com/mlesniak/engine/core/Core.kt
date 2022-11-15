@@ -12,6 +12,7 @@ class Core(private val renderer: Renderer) : ApplicationAdapter() {
     private lateinit var batch: SpriteBatch
     private lateinit var pixmap: Pixmap
     private lateinit var engine: Engine
+    private lateinit var inputProcessor: CoreInputProcessor
 
     override fun create() {
         batch = SpriteBatch()
@@ -19,17 +20,12 @@ class Core(private val renderer: Renderer) : ApplicationAdapter() {
         engine = Engine(Canvas(pixmap))
 
         renderer.setup()
+        inputProcessor = CoreInputProcessor()
+        Gdx.input.inputProcessor = inputProcessor
     }
 
-    override fun render() { // Later on we will collect all keys and/or mouse events
-        // and pass them to the update function.
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit()
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            engine.paused = !engine.paused
-        }
-        renderer.update(engine)
+    override fun render() {
+        renderer.update(inputProcessor.pressedKeys())
         renderer.draw(engine)
 
         val texture = Texture(pixmap)

@@ -44,7 +44,7 @@ class Model(
     }
 }
 
-fun Engine.model(model: Model, projection: Matrix) {
+fun Engine.model(model: Model, projection: Matrix, wireframe: Boolean = false) {
     // Direction of the light source. In this case,
     // going into the scene.
     val light = Vector(0f, 0f, -1f)
@@ -61,25 +61,17 @@ fun Engine.model(model: Model, projection: Matrix) {
         val p2h = projection * p2
         val p3h = projection * p3
 
-        // val max = 500
-        // if (p1h.y > max || p2h.y > max || p3h.y > max) {
-        //     continue
-        // }
-        //
-        // val m2 = 450
-        // if (p1h.x < m2 || p2h.x < m2 || p3h.x < m2) {
-        //    // continue
-        // }
 
         val normal = (p3h - p1h).cross(p2h - p1h).normalize()
         val intensity = normal * light
         if (intensity > 0) {
             val color = (255.0 * intensity).toInt()
             val rgb = (color shl 16) or (color shl 8) or color
-            triangle(p1h, p2h, p3h, rgb)
-            // wireTriangle(p1h, p2h, p3h, Random.nextInt())
+            if (wireframe) {
+                wireTriangle(p1h, p2h, p3h, rgb)
+            } else {
+                triangle(p1h, p2h, p3h, rgb)
+            }
         }
-        // println("$p1h $p2h $p3h")
-        // triangle(p1h, p2h, p3h, 0xFF0000)
     }
 }
