@@ -33,6 +33,10 @@ class Engine(private val canvas: Canvas) {
     fun pixel(p: Vector, rgb: Int = 0xFFFFFF) {
         val py = p.y.roundToInt()
         val px = p.x.roundToInt()
+        if (px < 0 || px > canvas.width || py < 0 || py > canvas.height) {
+            return
+        }
+
         val curz = zbuffer[py * canvas.height + px]
         // println(p.z)
         if (p.z > curz) {

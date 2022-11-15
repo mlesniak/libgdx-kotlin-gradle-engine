@@ -39,7 +39,7 @@ class EngineDemo : Renderer {
         val cy = engine.height() / 2
 
         // val scale = ((sin(angle * PI / 180.0) * 200)).toFloat().absoluteValue + 100f
-        val scale = 200f
+        val scale = 300f
         val projection =
             BaseMatrix.translate(400f, 300f) *
                 BaseMatrix.scale(scale, scale, scale) *
