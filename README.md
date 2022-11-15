@@ -23,6 +23,4 @@ class Canvas(private val pixmap: Pixmap) {
 }
 ```
 
-Bug: White Flickering on some triangles (precision problems?) 
-
 ![Current progress](animation.gif)
