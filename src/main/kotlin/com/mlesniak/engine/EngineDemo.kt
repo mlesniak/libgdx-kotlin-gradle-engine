@@ -44,7 +44,7 @@ class EngineDemo : Renderer {
             BaseMatrix.translate(400f, 300f) *
                 BaseMatrix.scale(scale, scale, scale) *
                 BaseMatrix.rotateZ(180f) *
-                BaseMatrix.rotateX(20f) *
+                BaseMatrix.rotateX(sin(angle / 100.0f) * 20f) *
                 // BaseMatrix.rotateY(78f)
                 // BaseMatrix.rotateY(42f)
                 BaseMatrix.rotateY(angle)
