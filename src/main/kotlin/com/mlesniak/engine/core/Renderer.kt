@@ -7,7 +7,7 @@ interface Renderer {
         // Empty by default .
     }
 
-    fun update() {
+    fun update(engine: Engine) {
         // Empty by default.
     }
 

@@ -25,6 +25,12 @@ class EngineDemo : Renderer {
         // model = Model.load("models/zbuffer-debug.obj")
     }
 
+    override fun update(engine: Engine) {
+        if (!engine.paused) {
+            angle += 1f
+        }
+    }
+
     // TODO(mlesniak) Non-orthogonal matrix
     override fun draw(engine: Engine) {
         engine.clear()
@@ -51,7 +57,6 @@ class EngineDemo : Renderer {
         // val projection = BaseMatrix.identity() *
         //     BaseMatrix.scale(scale, scale, scale)
         engine.model(model, projection)
-        angle += 1f
         // println("angle = $angle")
 
         // TODO(mlesniak) Z buffer!
