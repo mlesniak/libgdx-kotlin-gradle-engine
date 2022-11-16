@@ -9,27 +9,22 @@ class CoreInputProcessor : InputProcessor {
     private val minPressedDuration = 250
 
     // Collect keycodes from com.badlogic.gdx.Input.Keys.*
-    private val pressedKeys = mutableMapOf<KeyCode, Long>()
+    private val pressedKeys = mutableSetOf<KeyCode>()
 
-    fun pressedKeys(): Set<KeyCode> {
-        return pressedKeys.keys
+    fun clear() {
+        pressedKeys.clear()
     }
 
-    // TODO(mlesniak) correctl handle key events
+    fun pressedKeys(): Set<KeyCode> {
+        return pressedKeys
+    }
+
     override fun keyDown(keycode: Int): Boolean {
-        // if (keycode in pressedKeys) {
-        //     return true
-        // }
-        pressedKeys[keycode] = System.currentTimeMillis()
+        pressedKeys += keycode
         return true
     }
 
     override fun keyUp(keycode: Int): Boolean {
-        // val lastPressed = pressedKeys[keycode]!!
-        // if (System.currentTimeMillis() - lastPressed > minPressedDuration) {
-            pressedKeys.remove(keycode)
-        // }
-
         return true
     }
 

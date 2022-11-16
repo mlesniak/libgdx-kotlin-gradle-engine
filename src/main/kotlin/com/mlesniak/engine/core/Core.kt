@@ -26,6 +26,7 @@ class Core(private val renderer: Renderer) : ApplicationAdapter() {
 
     override fun render() {
         renderer.update(inputProcessor.pressedKeys())
+        inputProcessor.clear()
         renderer.draw(engine)
 
         val texture = Texture(pixmap)

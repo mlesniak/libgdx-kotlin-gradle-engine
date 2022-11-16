@@ -7,7 +7,7 @@ interface Renderer {
         // Empty by default .
     }
 
-    fun update(engine: Set<KeyCode>) {
+    fun update(pressedKeys: Set<KeyCode>) {
         // Empty by default.
     }
 
