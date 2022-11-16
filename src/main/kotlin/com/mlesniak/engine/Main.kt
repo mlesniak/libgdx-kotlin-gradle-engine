@@ -11,7 +11,7 @@ fun main() {
     // have just an Engine which wants an object implementing
     // update() and a draw().
     val config = Lwjgl3ApplicationConfiguration().apply {
-        setWindowedMode(800, 600)
+        setWindowedMode(1500, 1000)
         setForegroundFPS(60)
         setTitle("Engine Demo")
     }

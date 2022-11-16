@@ -36,13 +36,12 @@ class EngineDemo : Renderer {
         }
     }
 
-    // TODO(mlesniak) Non-orthogonal matrix
     override fun draw(engine: Engine) {
         engine.clear()
 
         val scale = 300f
         val projection =
-            Matrices.translate(400f, 300f) *
+            Matrices.translate(engine.width / 2f, engine.height / 2f) *
                 Matrices.scale(scale, scale, scale) *
                 Matrices.rotateZ(180f) *
                 Matrices.rotateX(30f) *
