@@ -94,13 +94,13 @@ class Engine(private val canvas: Canvas) {
     //
     // Based on d = f(i) in R2 with d as the dependent and i as the independent
     // variable; also f is linear.
-    fun interpolate(i0: Float, d0: Float, i1: Float, d1: Float): List<Float> {
-        // TODO(mlesniak) Use Array instead?
-        val arr = mutableListOf<Float>()
+    fun interpolate(i0: Float, d0: Float, i1: Float, d1: Float): FloatArray {
         val s = (d1 - d0) / (i1 - i0)
         var d = d0
-        for (i in i0.roundToInt()..i1.roundToInt()) {
-            arr.add(d)
+        val arr = FloatArray((i1.roundToInt()) - i0.roundToInt() + 1)
+
+        for (i in 0..((i1.roundToInt()) - i0.roundToInt())) {
+            arr[i] = d
             d += s
         }
 
@@ -144,8 +144,8 @@ class Engine(private val canvas: Canvas) {
         // can simply check the middle element to figure out
         // the smaller list.
         val m = x012.size / 2
-        var xLeft: List<Float>
-        var xRight: List<Float>
+        var xLeft: FloatArray
+        var xRight: FloatArray
         if (x02[m] < x012[m]) {
             xLeft = x02
             xRight = x012
