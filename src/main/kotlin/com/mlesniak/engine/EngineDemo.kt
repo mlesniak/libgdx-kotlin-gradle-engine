@@ -20,7 +20,7 @@ class EngineDemo : Renderer {
     private lateinit var model: Model
 
     override fun setup() {
-        val modelName = "lamp.obj"
+        val modelName = "head.obj"
         model = Model.load("models/$modelName")
     }
 
@@ -40,12 +40,12 @@ class EngineDemo : Renderer {
     override fun draw(engine: Engine) {
         engine.clear()
 
-        val scale = 40f
+        val scale = 300f
         val projection =
-            Matrices.translate(400f, 400f) *
+            Matrices.translate(400f, 300f) *
                 Matrices.scale(scale, scale, scale) *
                 Matrices.rotateZ(180f) *
-                Matrices.rotateX(sin(angle / 100.0f) * 20f) *
+                Matrices.rotateX(30f) *
                 Matrices.rotateY(angle)
         engine.model(model, projection, wireframe)
 

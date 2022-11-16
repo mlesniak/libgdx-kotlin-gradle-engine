@@ -61,13 +61,10 @@ fun Engine.model(model: Model, projection: Matrix, wireframe: Boolean = false) {
                     triangle(p1, p2, p3, rgb)
                 }
             }
-        }
-    }
-}
 
-fun main() {
-    val a = arrayOf(1, 2, 3, 4, 5, 6)
-    for (i in a.indices) {
-        println("${a[i]}, ${a[(i + 1) % a.size]}, ${a[(i + 2) % a.size]}")
+            if (face.size == 3) {
+                break
+            }
+        }
     }
 }
