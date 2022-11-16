@@ -45,20 +45,29 @@ fun Engine.model(model: Model, projection: Matrix, wireframe: Boolean = false) {
     for (idx in model.faces.indices) {
         val face = model.faces[idx]
 
-        val p1 = projection * model.vertices[face[0] - 1]
-        val p2 = projection * model.vertices[face[1] - 1]
-        val p3 = projection * model.vertices[face[2] - 1]
+        for (i in face.indices) {
+            val p1 = projection * model.vertices[face[i] - 1]
+            val p2 = projection * model.vertices[face[(i + 1) % face.size] - 1]
+            val p3 = projection * model.vertices[face[(i + 2) % face.size] - 1]
 
-        val normal = (p3 - p1).cross(p2 - p1).normalize()
-        val intensity = normal * light
-        if (intensity > 0) {
-            val color = (255.0 * intensity).toInt()
-            val rgb = (color shl 16) or (color shl 8) or color
-            if (wireframe) {
-                wireTriangle(p1, p2, p3, rgb)
-            } else {
-                triangle(p1, p2, p3, rgb)
+            val normal = (p3 - p1).cross(p2 - p1).normalize()
+            val intensity = normal * light
+            if (intensity > 0) {
+                val color = (255.0 * intensity).toInt()
+                val rgb = (color shl 16) or (color shl 8) or color
+                if (wireframe) {
+                    wireTriangle(p1, p2, p3, rgb)
+                } else {
+                    triangle(p1, p2, p3, rgb)
+                }
             }
         }
+    }
+}
+
+fun main() {
+    val a = arrayOf(1, 2, 3, 4, 5, 6)
+    for (i in a.indices) {
+        println("${a[i]}, ${a[(i + 1) % a.size]}, ${a[(i + 2) % a.size]}")
     }
 }
