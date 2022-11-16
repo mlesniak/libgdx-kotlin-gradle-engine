@@ -16,20 +16,15 @@ data class Vector(
     operator fun times(f: Float): Vector = Vector(x * f, y * f, z * f, w * f)
 
     // Dot product.
-    // Should this be a method since using * might be confusing?
     operator fun times(v: Vector): Float = x * v.x + y * v.y + z * v.z
 
     // Cross product
     // Source: https://www.khronos.org/opengl/wiki/Calculating_a_Surface_Normal
     fun cross(v: Vector): Vector {
-        // vec3 cross(const vec3 &v1, const vec3 &v2) {
-        //     return vec<3>{v1.y*v2.z - v1.z*v2.y, v1.z*v2.x - v1.x*v2.z, v1.x*v2.y - v1.y*v2.x};
-        // }
-
         return Vector(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x)
     }
 
-    operator fun plus(v: Vector): Vector = Vector(this.x + v.x, this.y + v.y, this.z + v.z + this.w + v.w)
+    operator fun plus(v: Vector): Vector = Vector(x + v.x, y + v.y, z + v.z + w + v.w)
 
     fun normalize(): Vector {
         return this * (1.0f / length())
@@ -44,14 +39,13 @@ data class Vector(
 
 typealias Matrix = Array<Array<Float>>
 
-operator fun Matrix.times(m: Matrix): Matrix {
-    val k: Array<Array<Float>> = Array(4) { y ->
+// Is an unrolled loop faster?
+operator fun Matrix.times(m: Matrix): Matrix =
+    Array(4) { y ->
         Array(4) { x ->
             this[y][0] * m[0][x] + this[y][1] * m[1][x] + this[y][2] * m[2][x] + this[y][3] * m[3][x]
         }
     }
-    return k
-}
 
 operator fun Matrix.times(v: Vector): Vector {
     return Vector(
@@ -62,17 +56,16 @@ operator fun Matrix.times(v: Vector): Vector {
     )
 }
 
-fun Array<Array<Float>>.debug(): String {
+fun Matrix.debug(): String {
     val sb = StringBuilder()
-    for (row in this) {
+    this.forEach { row ->
         sb.append(row.joinToString(" "))
         sb.append('\n')
     }
     return sb.toString()
 }
 
-// TODO(mlesniak) Not happy with that name.
-object BaseMatrix {
+object Matrices {
     fun identity(): Matrix =
         arrayOf(
             arrayOf(1f, 0f, 0f, 0f),
@@ -81,14 +74,13 @@ object BaseMatrix {
             arrayOf(0f, 0f, 0f, 1f),
         )
 
-    fun translate(dx: Float, dy: Float, dz: Float = 0.0f): Matrix {
-        return arrayOf(
+    fun translate(dx: Float, dy: Float, dz: Float = 0.0f): Matrix =
+        arrayOf(
             arrayOf(1f, 0f, 0f, dx),
             arrayOf(0f, 1f, 0f, dy),
             arrayOf(0f, 0f, 1f, dz),
             arrayOf(0f, 0f, 0f, 1f),
         )
-    }
 
     fun scale(sx: Float, sy: Float, sz: Float): Matrix =
         arrayOf(

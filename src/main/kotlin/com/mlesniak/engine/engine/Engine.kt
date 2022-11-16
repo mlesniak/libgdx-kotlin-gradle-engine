@@ -24,8 +24,8 @@ class Engine(private val canvas: Canvas) {
     private var zbuffer = Array(canvas.height * canvas.width) { -Float.MAX_VALUE }
 
     var projectionMatrix: Matrix =
-        BaseMatrix.scale(1.0f, 1.0f, 1.0f) *
-            BaseMatrix.translate((canvas.width / 2).toFloat(), (canvas.height / 2).toFloat())
+        Matrices.scale(1.0f, 1.0f, 1.0f) *
+            Matrices.translate((canvas.width / 2).toFloat(), (canvas.height / 2).toFloat())
 
     fun height() = canvas.height
     fun width() = canvas.width

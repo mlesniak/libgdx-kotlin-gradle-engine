@@ -1,11 +1,10 @@
 package com.mlesniak.engine
 
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Input
 import com.badlogic.gdx.Input.Keys
 import com.mlesniak.engine.core.KeyCode
 import com.mlesniak.engine.core.Renderer
-import com.mlesniak.engine.engine.BaseMatrix
+import com.mlesniak.engine.engine.Matrices
 import com.mlesniak.engine.engine.Engine
 import com.mlesniak.engine.engine.Model
 import com.mlesniak.engine.engine.model
@@ -45,13 +44,13 @@ class EngineDemo : Renderer {
         // val scale = ((sin(angle * PI / 180.0) * 200)).toFloat().absoluteValue + 100f
         val scale = 300f
         val projection =
-            BaseMatrix.translate(400f, 300f) *
-                BaseMatrix.scale(scale, scale, scale) *
-                BaseMatrix.rotateZ(180f) *
-                BaseMatrix.rotateX(sin(angle / 100.0f) * 20f) *
+            Matrices.translate(400f, 300f) *
+                Matrices.scale(scale, scale, scale) *
+                Matrices.rotateZ(180f) *
+                Matrices.rotateX(sin(angle / 100.0f) * 20f) *
                 // BaseMatrix.rotateY(78f)
                 // BaseMatrix.rotateY(42f)
-                BaseMatrix.rotateY(angle)
+                Matrices.rotateY(angle)
         // BaseMatrix.rotateY(943f)
         // BaseMatrix.rotateY(angle)
         // val scale = 150f

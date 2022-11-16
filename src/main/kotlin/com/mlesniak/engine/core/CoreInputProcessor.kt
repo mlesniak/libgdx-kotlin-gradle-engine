@@ -5,10 +5,9 @@ import com.badlogic.gdx.InputProcessor
 typealias KeyCode = Int
 
 class CoreInputProcessor : InputProcessor {
-    // Minimal time before a key can be released
-    private val minPressedDuration = 250
-
-    // Collect keycodes from com.badlogic.gdx.Input.Keys.*
+    // Collect keycodes from com.badlogic.gdx.Input.Keys.* which
+    // were pressed since the last clear -- usually, the last
+    // frame.
     private val pressedKeys = mutableSetOf<KeyCode>()
 
     fun clear() {
