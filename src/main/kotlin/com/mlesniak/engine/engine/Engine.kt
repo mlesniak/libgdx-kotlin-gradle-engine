@@ -317,22 +317,15 @@ class Engine(private val canvas: Canvas) {
         // println("p2 $p2")
 
         if (p1.y == p2.y) {
-            // fillBottomFlatTriangle(p0, p1, p2, rgb)
+            fillBottomFlatTriangle(p0, p1, p2, rgb)
         } else if (p0.y == p1.y) {
-            // fillTopFlatTriangle(p0, p1, p2, rgb)
+            fillTopFlatTriangle(p0, p1, p2, rgb)
         } else {
             val middle = Vector(
                 p0.x + ((p1.y - p0.y) / (p2.y - p0.y)) * (p2.x - p0.x),
                 p1.y,
                 p1.z,
             )
-            // println("mi $middle")
-            // var rr = colors[c++ % colors.size]
-            // println("TOP p0 p1 mi")
-            // fillBottomFlatTriangle(p0, p1, middle, rr)
-            // rr = colors[c++ % colors.size]
-            // fillTopFlatTriangle(p1, middle, p2, rr)
-
             fillBottomFlatTriangle(p0, p1, middle, rgb)
             fillTopFlatTriangle(p1, middle, p2, rgb)
         }

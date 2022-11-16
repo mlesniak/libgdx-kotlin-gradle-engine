@@ -1,6 +1,5 @@
 package com.mlesniak.engine.engine
 
-import com.mlesniak.engine.engine.Model.Companion.forObject
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.regex.Pattern
