@@ -8,10 +8,6 @@ import java.util.regex.Pattern
 class Model(
     val vertices: List<Vector>,
     val faces: List<List<Int>>,
-
-    // Not sure if these are needed for our
-    // purposes anymore?
-    val vertexNormals: List<Vector>,
 ) {
     companion object {
         fun load(filename: String): Model {
@@ -24,21 +20,13 @@ class Model(
                 }
                 .map { plist -> Vector(plist[0], plist[1], plist[2]) }
 
-            val normals = lines
-                .forObject("vn")
-                .map {
-                    it.subList(1, 4)
-                        .map { v -> v.toFloat() }
-                }
-                .map { plist -> Vector(plist[0], plist[1], plist[2]) }
-
             val faces = lines
                 .forObject("f")
                 .map {
                     it.subList(1, it.size).map { i -> i.split("/")[0].toInt() }
                 }
 
-            return Model(vertices, faces, normals)
+            return Model(vertices, faces)
         }
 
         private fun MutableList<String>.forObject(prefix: String) =
