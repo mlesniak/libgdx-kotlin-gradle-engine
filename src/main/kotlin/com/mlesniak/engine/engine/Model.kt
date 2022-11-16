@@ -29,7 +29,7 @@ class Model(
             return Model(vertices, faces)
         }
 
-        private fun MutableList<String>.forObject(prefix: String) =
+        private fun List<String>.forObject(prefix: String) =
             this
                 .filter { line -> line.startsWith("$prefix ") }
                 .map { it.split(Pattern.compile(" +")) }
