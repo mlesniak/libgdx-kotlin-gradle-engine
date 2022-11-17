@@ -28,4 +28,6 @@ class Canvas(private val pixmap: Pixmap) {
 }
 ```
 
-![Current progress](animation-head.gif)
+![](animation-head.gif)
+![](animation-lamp.gif)
+![](animation-car.gif)

@@ -32,7 +32,7 @@ class EngineDemo : Renderer {
         }
 
         if (!paused) {
-            angle += 1f
+            angle += 2f
         }
     }
 
@@ -41,11 +41,11 @@ class EngineDemo : Renderer {
 
         val scale = 3f
         val projection =
-            Matrices.translate(engine.width / 2f, engine.height / 2f) *
+            Matrices.translate(engine.width / 2f, engine.height / 2f + 100f) *
                 Matrices.scale(scale, scale, scale) *
-                Matrices.rotateZ(angle) *
-                Matrices.rotateX(angle) *
-                Matrices.rotateY(angle)
+                Matrices.rotateZ(0f) *
+                Matrices.rotateY(angle) *
+                Matrices.rotateX(70f)
         engine.model(model, projection, wireframe)
 
         if (tick % 60 == 0) {
