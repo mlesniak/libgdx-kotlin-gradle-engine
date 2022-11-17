@@ -3,6 +3,7 @@
 TODOs
 - Improve speed
 - Add correct projection (instead of orthogonal one)
+- Add mouse/camera movement
 
 Work in progress -- no information here yet ... and there's a lot of cleanup necessary, currently totally in hack mode.
 
