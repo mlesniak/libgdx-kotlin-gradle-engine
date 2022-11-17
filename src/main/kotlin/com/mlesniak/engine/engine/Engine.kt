@@ -24,7 +24,7 @@ class Engine(private val canvas: Canvas) {
     fun pixel(p: Vector, rgb: Int = 0xFFFFFF) {
         val py = p.y.roundToInt()
         val px = p.x.roundToInt()
-        if (px < 0 || px > width || py < 0 || py > height) {
+        if (px < 0 || px >= width || py < 0 || py >= height) {
             return
         }
 
