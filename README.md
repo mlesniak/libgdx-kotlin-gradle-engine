@@ -1,6 +1,6 @@
 # Overview
 
-This is a small pure software renderer to visualize arbitrary 3D models and theoretically, anything that can be reduced to vertices and triangles. It's primary purpose was to refresh my knowledge about computer graphics and to built something based on first principles. That means, that I didn't want to use any existing 3D engine but instead built everything via a single operation `pixel`:
+This is a small pure software renderer to visualize arbitrary 3D models and theoretically, anything that can be reduced to vertices and triangles. It's primary purpose was to refresh my knowledge about computer graphics, i.e. **understand the underlying math and formulas (again)**, and built something based on first principles. That means, that I didn't want to use any existing 3D engine but instead built everything via a single operation `pixel`:
 
 ```kotlin
 interface Canvas {
