@@ -45,6 +45,10 @@ Right now, the z-Coordinate is basically ignored and there is no correct perspec
 
 It would be nice to move around the scene with standard WASD keys and mouse movements; I've done it for another private project where I directly used OpenGL in Go (and thus it's a bit boring to implement it again).
 
+### Fix rendering artifacts
+
+There are still some rendering artifacts and not completely accurate rendering of small triangles; this is probably due to my choice of algorithms and my initial decision to use Floats instead of Doubles. In hindsight, using Floats probably wasn't worth it.
+
 ## Examples
 
 ![](animation-head.gif)
