@@ -20,7 +20,7 @@ class EngineDemo : Renderer {
     private lateinit var model: Model
 
     override fun setup() {
-        val modelName = "alfa147.obj"
+        val modelName = "head.obj"
         model = Model.load("models/$modelName")
     }
 
@@ -39,13 +39,13 @@ class EngineDemo : Renderer {
     override fun draw(engine: Engine) {
         engine.clear()
 
-        val scale = 3f
+        val scale = 200f
         val projection =
-            Matrices.translate(engine.width / 2f, engine.height / 2f + 100f) *
+            Matrices.translate(engine.width / 2f, engine.height / 2f + 50f) *
                 Matrices.scale(scale, scale, scale) *
-                Matrices.rotateZ(0f) *
+                Matrices.rotateZ(180f) *
                 Matrices.rotateY(angle) *
-                Matrices.rotateX(70f)
+                Matrices.rotateX(-20f)
         engine.model(model, projection, wireframe)
 
         if (tick % 60 == 0) {
