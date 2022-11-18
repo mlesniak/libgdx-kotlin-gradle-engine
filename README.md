@@ -21,7 +21,7 @@ The two most interesting classes are probably [Model.kt](https://github.com/mles
 Thanks to libGDX, a simple
 
     gradle build
-    java -XstartOnFirstThread -jar build/libs/base-kotlin-gdx-gradle-all.jar
+    java -XstartOnFirstThread -jar build/libs/libgdx-kotlin-gradle-engine-all.jar
 
 should suffice to build and run the project. The parameter `-XstartOnFirstThread` is necessary on MacOS and can be omitted on other operating systems.
 
