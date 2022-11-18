@@ -29,23 +29,23 @@ should suffice to build and run the project. The parameter `-XstartOnFirstThread
 
 As with every private project, it's neither finished nor professionally complete -- but that's the whole idea of recreational projects, right? Hence, these things are (at least) still open:
 
-### Improve rendering speed
+#### Improve rendering speed
 
 That's a tricky one. Right now the engine uses a single core and educational (instead of more performant) algorithms. We're also not using any GPU at all, which definitely limits possible performance gains. Nevertheless, it would be interesting to figure out how fast we can get by investing some time in benchmarks and bytecode analysis.
 
-### Testing
+#### Testing
 
 As with every graphical project, testing is challenging. At least the underlying mathematical operations could be supported by accompanying tests.
 
-### Perspective instead of Orthogonal Projection
+#### Perspective instead of Orthogonal Projection
 
 Right now, the z-Coordinate is basically ignored and there is no correct perspective correction based on its value. In theory this can easily be implemented since there are just some additional matrix operations.
 
-### Mouse-based Camera Movement
+#### Mouse-based Camera Movement
 
 It would be nice to move around the scene with standard WASD keys and mouse movements; I've done it for another private project where I directly used OpenGL in Go (and thus it's a bit boring to implement it again).
 
-### Fix rendering artifacts
+#### Fix rendering artifacts
 
 There are still some rendering artifacts and not completely accurate rendering of small triangles; this is probably due to my choice of algorithms and my initial decision to use Floats instead of Doubles. In hindsight, using Floats probably wasn't worth it.
 
